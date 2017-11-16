@@ -1,0 +1,2 @@
+# SchoolActivitiesMonitoringSystem
+Project starting point

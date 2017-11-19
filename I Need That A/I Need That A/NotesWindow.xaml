@@ -1,0 +1,135 @@
+﻿<Window x:Class="I_Need_That_A.NotesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="NotesWindow"
+        Width="1366"
+        Height="768"
+        AllowsTransparency="True"
+        WindowState="Maximized"
+        WindowStyle="None">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Border Background=" #06425C"
+                BorderBrush="White"
+                BorderThickness="0,0,0,3">
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <TextBlock Margin="50,20,4,4"
+                           FontSize="50"
+                           FontWeight="ExtraLight"
+                           Foreground="White"
+                           Text="Notes">
+                    <TextBlock.Effect>
+                        <DropShadowEffect />
+                    </TextBlock.Effect>
+                </TextBlock>
+            </StackPanel>
+        </Border>
+        <Grid Grid.Row="1">
+            <Grid Grid.Column="0">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Margin="20,0,20,0" Orientation="Horizontal">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="683" />
+                                <ColumnDefinition Width="683" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0"
+                                       Margin="15,4,4,4"
+                                       HorizontalAlignment="Left"
+                                       FontSize="40"
+                                       FontWeight="Light"
+                                       Foreground="#B7695C"
+                                       Text="{Binding Path=Name}">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect ShadowDepth="3" />
+                                </TextBlock.Effect>
+                            </TextBlock>
+                            <StackPanel Grid.Column="1"
+                                        HorizontalAlignment="Right"
+                                        Orientation="Horizontal">
+                                <Button x:Name="BtnAddNote"
+                                        Width="63"
+                                        Height="30"
+                                        Margin="0,4,4,4"
+                                        VerticalAlignment="Bottom"
+                                        Content="Add"
+                                        FontSize="15"
+                                        Padding="3" Click="BtnAddNote_Click">
+                                    <Button.Effect>
+                                        <DropShadowEffect ShadowDepth="3" />
+                                    </Button.Effect>
+                                </Button>
+                                <Button x:Name="BtnRemoveActivity"
+                                        Width="63"
+                                        Height="30"
+                                        Margin="4,4,50,4"
+                                        VerticalAlignment="Bottom"
+                                        Content="Remove"
+                                        FontSize="15"
+                                        Padding="3" Click="BtnRemoveActivity_Click">
+                                    <Button.Effect>
+                                        <DropShadowEffect ShadowDepth="3" />
+                                    </Button.Effect>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                    <ListBox x:Name="LbListNotes" Height="500"
+                             Margin="20,0,20,20"
+                             Background="#51A39D"
+                             BorderBrush="#06425C" ItemsSource="{Binding Path=ListNotes}"
+                             SelectedItem="{Binding Path=SelectedNote}"
+                             BorderThickness="3">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock HorizontalAlignment="Left"
+                                               FontSize="25"
+                                               FontWeight="Light"
+                                               Text="- "
+                                               TextWrapping="Wrap">
+                                        <TextBlock.Effect>
+                                            <DropShadowEffect ShadowDepth="1" />
+                                        </TextBlock.Effect>
+                                    </TextBlock>
+                                    <TextBlock HorizontalAlignment="Left"
+                                               FontSize="25"
+                                               FontWeight="Light"
+                                               Text="{Binding Path=Note}"
+                                               TextWrapping="Wrap">
+                                        <TextBlock.Effect>
+                                            <DropShadowEffect ShadowDepth="1" />
+                                        </TextBlock.Effect>
+                                    </TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <StackPanel Grid.Row="3"
+                    Background="White"
+                    Orientation="Vertical">
+            <StackPanel Background="White" Orientation="Horizontal">
+                <Button x:Name="BtnReturn"
+                        Width="150"
+                        Margin="20,0,0,0"
+                        HorizontalAlignment="Left"
+                        Content="Return"
+                        FontSize="23"
+                        FontWeight="ExtraLight"
+                        Padding="10" Click="BtnReturn_Click">
+                    <Button.Effect>
+                        <DropShadowEffect />
+                    </Button.Effect>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

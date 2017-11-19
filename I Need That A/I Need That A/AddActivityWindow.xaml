@@ -1,0 +1,122 @@
+﻿<Window x:Class="I_Need_That_A.AddActivityWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="AddActivityWindow"
+        Width="670"
+        Height="670" BorderThickness="2" BorderBrush="Black"
+        AllowsTransparency="True"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        WindowStyle="None">
+    <Grid Background="white">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0"
+                BorderBrush="White"
+                BorderThickness="0,0,0,2">
+            <StackPanel Background="#06425C" Orientation="Horizontal" Loaded="StackPanel_Loaded">
+                <TextBlock Margin="40,20,4,4"
+                           FontSize="50"
+                           FontWeight="ExtraLight"
+                           Foreground="White"
+                           Text="Add Activity">
+                    <TextBlock.Effect>
+                        <DropShadowEffect />
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Button x:Name="BtnSave"
+                        Width="120"
+                        Height="50"
+                        Margin="110,4,4,10"
+                        VerticalAlignment="Bottom"
+                       
+                        Content="Save"
+                        FontSize="23"
+                        FontWeight="Light"
+                        Padding="10" Click="BtnSave_Click">
+                    <Button.Effect>
+                        <DropShadowEffect />
+                    </Button.Effect>
+                </Button>
+                <Button x:Name="BtnCancel"
+                        Width="120"
+                        Height="50"
+                        Margin="4,4,4,10"
+                        VerticalAlignment="Bottom"
+                        BorderThickness="0"
+                     
+                        Content="Cancel"
+                        FontSize="23"
+                        FontWeight="Light"
+                        Padding="10" Click="BtnCancel_Click">
+                    <Button.Effect>
+                        <DropShadowEffect />
+                    </Button.Effect>
+                </Button>
+            </StackPanel>
+        </Border>
+        <StackPanel Grid.Row="1"
+                    Background="white"
+                    Orientation="Vertical">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Margin="60,15,0,0"
+                           FontFamily="Century Gothic"
+                           FontSize="30"
+                           FontWeight="ExtraLight"
+                           Foreground="#51A39D"
+                           Text="Description" />
+                <TextBox x:Name="TbxDescription"
+                         Width="540" TextWrapping="Wrap"
+                         Height="100"
+                         Margin="60,10,0,10"
+                         HorizontalAlignment="left"
+                         FontSize="20"
+                         Text="{Binding Path=Description}" />
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Margin="60,15,0,0"
+                           FontFamily="Century Gothic"
+                           FontSize="30"
+                           FontWeight="ExtraLight"
+                           Foreground="#51A39D"
+                           Text="Deadline" />
+                <DatePicker x:Name="DpDeadline" MinWidth="540"
+                            MinHeight="30"
+                            Margin="60,10,0,10" SelectedDate="{Binding Path=Deadline}"
+                            HorizontalAlignment="Left"
+                            FontSize="20" />
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Margin="60,15,0,0"
+                           FontFamily="Century Gothic"
+                           FontSize="30"
+                           FontWeight="ExtraLight"
+                           Foreground="#51A39D"
+                           Text="Importance (5 - Very Important)" />
+                <ComboBox x:Name="CmbImportance" MinWidth="100"
+                          MinHeight="30"
+                          Margin="60,10,0,10" SelectedItem="{Binding Path=Importance}"
+                          HorizontalAlignment="Left"
+                          FontSize="20" />
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Margin="60,15,0,0"
+                           FontFamily="Century Gothic"
+                           FontSize="30"
+                           FontWeight="ExtraLight"
+                           Foreground="#51A39D"
+                           Text="Type" />
+                <StackPanel Orientation="Horizontal">
+                    <ComboBox x:Name="CmbType"
+                              MinWidth="150" Margin="60,10,0,0"
+                              HorizontalContentAlignment="Center"
+                              VerticalContentAlignment="Center"
+                              FontSize="20"
+                              Padding="3"
+                              SelectedItem="{Binding Path=Type}" />
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

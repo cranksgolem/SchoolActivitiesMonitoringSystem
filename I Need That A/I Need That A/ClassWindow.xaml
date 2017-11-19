@@ -1,0 +1,358 @@
+﻿<Window x:Class="I_Need_That_A.ClassWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ClassWindow"
+        Width="1366"
+        Height="768"
+        WindowState="Maximized"
+        WindowStyle="None">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="#06425C">
+            <Border BorderBrush="White" BorderThickness="0,0,0,2">
+                <StackPanel Orientation="Horizontal">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="321" />
+                            <ColumnDefinition Width="300" />
+                            <ColumnDefinition Width="341" />
+                            <ColumnDefinition Width="402" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0"
+                                   Margin="50,20,0,4"
+                                   HorizontalAlignment="Left"
+                                   FontSize="50"
+                                   FontWeight="ExtraLight"
+                                   Foreground="White"
+                                   Text="Classes" IsMouseDirectlyOverChanged="TextBlock_IsMouseDirectlyOverChanged">
+                            <TextBlock.Effect>
+                                <DropShadowEffect />
+                            </TextBlock.Effect>
+                        </TextBlock>
+                        <StackPanel Grid.Column="1"
+                                    HorizontalAlignment="Center"
+                                    Orientation="Horizontal">
+                            <TextBlock Grid.Column="0"
+                                       VerticalAlignment="Bottom"
+                                       FontSize="40"
+                                       FontWeight="ExtraLight"
+                                       Foreground="White"
+                                       Text="Max Units: ">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect />
+                                </TextBlock.Effect>
+                            </TextBlock>
+                            <TextBlock Grid.Column="0"
+                                       VerticalAlignment="Bottom"
+                                       FontSize="40"
+                                       FontWeight="ExtraLight"
+                                       Foreground="White"
+                                       Text="{Binding Path=RequiredUnits}">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect />
+                                </TextBlock.Effect>
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2"
+                                    HorizontalAlignment="Center"
+                                    Orientation="Horizontal">
+                            <TextBlock Grid.Column="0"
+                                       VerticalAlignment="Bottom"
+                                       FontSize="40"
+                                       FontWeight="ExtraLight"
+                                       Foreground="White"
+                                       Text="Used Units: ">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect />
+                                </TextBlock.Effect>
+                            </TextBlock>
+                            <TextBlock Grid.Column="0"
+                                       VerticalAlignment="Bottom"
+                                       FontSize="40"
+                                       FontWeight="ExtraLight"
+                                       Foreground="White"
+                                       Text="{Binding Path=UsedUnits}">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect />
+                                </TextBlock.Effect>
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel Grid.Column="3"
+                                    HorizontalAlignment="Right"
+                                    Orientation="Horizontal">
+                            <Button x:Name="BtnAddClass"
+                                    Width="120"
+                                    Height="50"
+                                    Margin="0,4,4,10"
+                                    VerticalAlignment="Bottom"
+                                    BorderThickness="0"
+                                    Click="BtnAddClass_Click"
+                                    Content="Add"
+                                    FontSize="23"
+                                    FontWeight="Light"
+                                    Padding="10">
+                                <Button.Effect>
+                                    <DropShadowEffect />
+                                </Button.Effect>
+                            </Button>
+                            <Button x:Name="BtnEditClass"
+                                    Width="120"
+                                    Height="50"
+                                    Margin="4,4,4,10"
+                                    VerticalAlignment="Bottom"
+                                    BorderThickness="0"
+                                    Click="BtnEditClass_Click"
+                                    Content="Edit"
+                                    FontSize="23"
+                                    FontWeight="Light"
+                                    Padding="10">
+                                <Button.Effect>
+                                    <DropShadowEffect />
+                                </Button.Effect>
+                            </Button>
+                            <Button x:Name="BtnRemoveClass"
+                                    Width="120"
+                                    Height="50"
+                                    Margin="4,4,20,10"
+                                    VerticalAlignment="Bottom"
+                                    BorderThickness="0"
+                                    Click="BtnRemoveClass_Click"
+                                    Content="Remove"
+                                    FontSize="23"
+                                    FontWeight="Light"
+                                    Padding="10">
+                                <Button.Effect>
+                                    <DropShadowEffect />
+                                </Button.Effect>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </Grid>
+        <Grid Grid.Row="1" Background="White">
+            <StackPanel Orientation="Vertical">
+                <ListView x:Name="LbClassList"
+                          MinHeight="550"
+                          Margin="20"
+                          Background="#51A39D"
+                          BorderBrush="#06425C"
+                          BorderThickness="3"
+                          ItemsSource="{Binding Path=ListClasses}"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          SelectedItem="{Binding Path=SelectedClass}">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView>
+                            <GridView.Columns>
+                                <GridViewColumn Width="265" Header="Lastname">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock HorizontalAlignment="Center"
+                                                       FontSize="30"
+                                                       FontWeight="Light"
+                                                       Text="Class Name" />
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock HorizontalAlignment="Center"
+                                                       FontSize="30" TextWrapping="Wrap"
+                                                       FontWeight="Light"
+                                                       Text="{Binding Path=Name}">
+                                                <TextBlock.Effect>
+                                                    <DropShadowEffect ShadowDepth="1" />
+                                                </TextBlock.Effect>
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Width="265" Header="Lastname">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock HorizontalAlignment="Center"
+                                                       FontSize="30"
+                                                       FontWeight="Light"
+                                                       Text="Units" />
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock HorizontalAlignment="Center"
+                                                       FontSize="30"
+                                                       FontWeight="Light"
+                                                       Text="{Binding Path=Units}">
+                                                <TextBlock.Effect>
+                                                    <DropShadowEffect ShadowDepth="1" />
+                                                </TextBlock.Effect>
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Width="265" Header="Lastname">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock HorizontalAlignment="Center"
+                                                       FontSize="30"
+                                                       FontWeight="Light"
+                                                       Text="Day Schedule" />
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock HorizontalAlignment="Center"
+                                                       FontSize="30"
+                                                       FontWeight="Light"
+                                                       Text="{Binding Path=DaySchedule}">
+                                                <TextBlock.Effect>
+                                                    <DropShadowEffect ShadowDepth="1" />
+                                                </TextBlock.Effect>
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Width="265" Header="Lastname">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock HorizontalAlignment="Center"
+                                                       FontSize="30"
+                                                       FontWeight="Light"
+                                                       Text="Time Schedule" />
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                                <TextBlock HorizontalAlignment="Center"
+                                                           FontSize="30"
+                                                           FontWeight="Light"
+                                                           Text="{Binding Path=TimeScheduleFromHour}">
+                                                    <TextBlock.Effect>
+                                                        <DropShadowEffect ShadowDepth="1" />
+                                                    </TextBlock.Effect>
+                                                </TextBlock>
+                                                <TextBlock HorizontalAlignment="Center"
+                                                           FontSize="30"
+                                                           FontWeight="Light"
+                                                           Text=":">
+                                                    <TextBlock.Effect>
+                                                        <DropShadowEffect ShadowDepth="1" />
+                                                    </TextBlock.Effect>
+                                                </TextBlock>
+                                                <TextBlock HorizontalAlignment="Center"
+                                                           FontSize="30"
+                                                           FontWeight="Light"
+                                                           Text="{Binding Path=TimeScheduleFromMinute}">
+                                                    <TextBlock.Effect>
+                                                        <DropShadowEffect ShadowDepth="1" />
+                                                    </TextBlock.Effect>
+                                                </TextBlock>
+                                                <TextBlock HorizontalAlignment="Center"
+                                                           FontSize="30"
+                                                           FontWeight="Light"
+                                                           Text="-">
+                                                    <TextBlock.Effect>
+                                                        <DropShadowEffect ShadowDepth="1" />
+                                                    </TextBlock.Effect>
+                                                </TextBlock>
+                                                <TextBlock HorizontalAlignment="Center"
+                                                           FontSize="30"
+                                                           FontWeight="Light"
+                                                           Text="{Binding Path=TimeScheduleToHour}">
+                                                    <TextBlock.Effect>
+                                                        <DropShadowEffect ShadowDepth="1" />
+                                                    </TextBlock.Effect>
+                                                </TextBlock>
+                                                <TextBlock HorizontalAlignment="Center"
+                                                           FontSize="30"
+                                                           FontWeight="Light"
+                                                           Text=":">
+                                                    <TextBlock.Effect>
+                                                        <DropShadowEffect ShadowDepth="1" />
+                                                    </TextBlock.Effect>
+                                                </TextBlock>
+                                                <TextBlock HorizontalAlignment="Center"
+                                                           FontSize="30"
+                                                           FontWeight="Light"
+                                                           Text="{Binding Path=TimeScheduleToMinute}">
+                                                    <TextBlock.Effect>
+                                                        <DropShadowEffect ShadowDepth="1" />
+                                                    </TextBlock.Effect>
+                                                </TextBlock>
+                                                <TextBlock HorizontalAlignment="Center"
+                                                           FontSize="30"
+                                                           FontWeight="Light"
+                                                           Text="{Binding Path=TimeScheduleType}">
+                                                    <TextBlock.Effect>
+                                                        <DropShadowEffect ShadowDepth="1" />
+                                                    </TextBlock.Effect>
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Width="265" Header="Lastname">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock HorizontalAlignment="Center"
+                                                       FontSize="30"
+                                                       FontWeight="Light"
+                                                       Text="Professor" />
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock HorizontalAlignment="Center"
+                                                       FontSize="30" TextWrapping="Wrap"
+                                                       FontWeight="Light"
+                                                       Text="{Binding Path=Professor}">
+                                                <TextBlock.Effect>
+                                                    <DropShadowEffect ShadowDepth="1" />
+                                                </TextBlock.Effect>
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView.Columns>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <StackPanel Background="White" Orientation="Horizontal">
+                    <Button x:Name="BtnReturn"
+                            Width="150"
+                            Margin="20,0,0,0"
+                            HorizontalAlignment="Left"
+                            Click="BtnReturn_Click"
+                            Content="Return"
+                            FontSize="23"
+                            FontWeight="ExtraLight"
+                            Padding="10">
+                        <Button.Effect>
+                            <DropShadowEffect />
+                        </Button.Effect>
+                    </Button>
+                    <Button x:Name="BtnEnterClass"
+                            Width="150"
+                            Margin="1016,0,0,0"
+                            HorizontalAlignment="Right"
+                            Click="BtnEnterClass_Click"
+                            Content="Enter"
+                            FontSize="23"
+                            FontWeight="ExtraLight"
+                            Padding="10">
+                        <Button.Effect>
+                            <DropShadowEffect />
+                        </Button.Effect>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

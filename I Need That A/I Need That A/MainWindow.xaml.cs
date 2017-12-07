@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +26,17 @@ namespace I_Need_That_A
         {
             InitializeComponent();
             this.DataContext = ViewModelLocator.StartMenuViewModel;
+
+            SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\kncvinson\Documents\SchoolMonitoringProject2\SchoolActivitiesMonitoringSystem-AddTables\SchoolActivitiesMonitoringSystem-AddTables\Database1.mdf");
+            SqlDataAdapter sda2 = new SqlDataAdapter("SELECT SchoolYear, Description From [SUBJECT]", con);
+            DataTable dt = new DataTable();
+            sda2.Fill(dt);
+
+            for (int x = 0; x < dt.Rows.Count; x++)
+            {
+                object obmaxflowrate1 = dt.Rows[x]["Description"];
+                MessageBox.Show(obmaxflowrate1.ToString());
+            }
         }
 
         private void BtnEnter_Click(object sender, RoutedEventArgs e)

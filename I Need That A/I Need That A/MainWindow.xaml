@@ -8,9 +8,9 @@
         WindowState="Maximized"
         WindowStyle="None">
     <Grid>
-        <Grid.Background>
+        <!--<Grid.Background>
             <ImageBrush ImageSource="C:\Users\Vinson\Desktop\School\2nd Year Programming\Final Project\I Need That A\I Need That A\Images\ZenBG.png" />
-        </Grid.Background>
+        </Grid.Background>-->
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>

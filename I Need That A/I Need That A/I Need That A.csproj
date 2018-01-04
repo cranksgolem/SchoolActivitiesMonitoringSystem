@@ -13,6 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -25,7 +26,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -68,6 +68,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ACTIVITY.cs" />
     <Compile Include="AddActivityWindow.xaml.cs">
       <DependentUpon>AddActivityWindow.xaml</DependentUpon>
     </Compile>
@@ -105,18 +106,22 @@
     <Compile Include="NotesWindow.xaml.cs">
       <DependentUpon>NotesWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SCORE.cs" />
     <Compile Include="SelectedClassWindow.xaml.cs">
       <DependentUpon>SelectedClassWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SEMESTER.cs" />
     <Compile Include="SemesterSelectWindow.xaml.cs">
       <DependentUpon>SemesterSelectWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SUBJECT.cs" />
     <Compile Include="ToDoListHistoryWindow.xaml.cs">
       <DependentUpon>ToDoListHistoryWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ToDoListWindow.xaml.cs">
       <DependentUpon>ToDoListWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="USERS.cs" />
     <Compile Include="ViewModelClass.cs" />
     <Page Include="AddActivityWindow.xaml">
       <SubType>Designer</SubType>
@@ -236,15 +241,6 @@
     <Resource Include="Images\Drawing.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Database1.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Database1_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>Database1.mdf</DependentUpon>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
@@ -255,6 +251,15 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Database.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Database_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>Database.mdf</DependentUpon>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

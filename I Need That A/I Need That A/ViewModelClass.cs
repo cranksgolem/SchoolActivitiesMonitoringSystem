@@ -408,6 +408,11 @@ namespace I_Need_That_A
             }
         }
 
+        public void AddComponent(GradingComponent newGC)
+        {
+            SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod.ListGradingComponents.Add(newGC);
+        }
+
         public void EditComponent()
         {
             var window = new AddGradingComponentWindow();

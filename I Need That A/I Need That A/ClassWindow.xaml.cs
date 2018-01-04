@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +24,22 @@ namespace I_Need_That_A
         public ClassWindow()
         {
             InitializeComponent();
+
+            SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Vinson\Desktop\School\4th Year\ObjectOrientedProgramming\SchoolMonitoringSystem2\SchoolActivitiesMonitoringSystem-AddTables\Database1.mdf");
+            SqlDataAdapter sda2 = new SqlDataAdapter("SELECT Description, Schedule, Units From [SUBJECT]", con);
+            DataTable dt = new DataTable();
+            sda2.Fill(dt);
+
+            for (int x = 0; x < dt.Rows.Count; x++)
+            {
+                Class newClass = new Class();
+
+                newClass.Name = dt.Rows[x]["Description"].ToString();
+                newClass.DaySchedule = dt.Rows[x]["Schedule"].ToString();
+                newClass.Units = Convert.ToDouble(dt.Rows[x]["Units"]);
+
+                ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.ListClasses.Add(newClass);
+            }
         }
 
         private void BtnAddClass_Click(object sender, RoutedEventArgs e)

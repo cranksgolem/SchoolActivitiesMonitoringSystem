@@ -152,7 +152,7 @@
                     <ListView.View>
                         <GridView>
                             <GridView.Columns>
-                                <GridViewColumn Width="265" Header="Lastname">
+                                <GridViewColumn Width="455" Header="Lastname">
                                     <GridViewColumn.HeaderTemplate>
                                         <DataTemplate>
                                             <TextBlock HorizontalAlignment="Center"
@@ -174,7 +174,7 @@
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-                                <GridViewColumn Width="265" Header="Lastname">
+                                <GridViewColumn Width="455" Header="Lastname">
                                     <GridViewColumn.HeaderTemplate>
                                         <DataTemplate>
                                             <TextBlock HorizontalAlignment="Center"
@@ -196,13 +196,13 @@
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-                                <GridViewColumn Width="265" Header="Lastname">
+                                <GridViewColumn Width="455" Header="Lastname">
                                     <GridViewColumn.HeaderTemplate>
                                         <DataTemplate>
                                             <TextBlock HorizontalAlignment="Center"
                                                        FontSize="30"
                                                        FontWeight="Light"
-                                                       Text="Day Schedule" />
+                                                       Text="Schedule" />
                                         </DataTemplate>
                                     </GridViewColumn.HeaderTemplate>
                                     <GridViewColumn.CellTemplate>
@@ -218,108 +218,8 @@
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-                                <GridViewColumn Width="265" Header="Lastname">
-                                    <GridViewColumn.HeaderTemplate>
-                                        <DataTemplate>
-                                            <TextBlock HorizontalAlignment="Center"
-                                                       FontSize="30"
-                                                       FontWeight="Light"
-                                                       Text="Time Schedule" />
-                                        </DataTemplate>
-                                    </GridViewColumn.HeaderTemplate>
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                                                <TextBlock HorizontalAlignment="Center"
-                                                           FontSize="30"
-                                                           FontWeight="Light"
-                                                           Text="{Binding Path=TimeScheduleFromHour}">
-                                                    <TextBlock.Effect>
-                                                        <DropShadowEffect ShadowDepth="1" />
-                                                    </TextBlock.Effect>
-                                                </TextBlock>
-                                                <TextBlock HorizontalAlignment="Center"
-                                                           FontSize="30"
-                                                           FontWeight="Light"
-                                                           Text=":">
-                                                    <TextBlock.Effect>
-                                                        <DropShadowEffect ShadowDepth="1" />
-                                                    </TextBlock.Effect>
-                                                </TextBlock>
-                                                <TextBlock HorizontalAlignment="Center"
-                                                           FontSize="30"
-                                                           FontWeight="Light"
-                                                           Text="{Binding Path=TimeScheduleFromMinute}">
-                                                    <TextBlock.Effect>
-                                                        <DropShadowEffect ShadowDepth="1" />
-                                                    </TextBlock.Effect>
-                                                </TextBlock>
-                                                <TextBlock HorizontalAlignment="Center"
-                                                           FontSize="30"
-                                                           FontWeight="Light"
-                                                           Text="-">
-                                                    <TextBlock.Effect>
-                                                        <DropShadowEffect ShadowDepth="1" />
-                                                    </TextBlock.Effect>
-                                                </TextBlock>
-                                                <TextBlock HorizontalAlignment="Center"
-                                                           FontSize="30"
-                                                           FontWeight="Light"
-                                                           Text="{Binding Path=TimeScheduleToHour}">
-                                                    <TextBlock.Effect>
-                                                        <DropShadowEffect ShadowDepth="1" />
-                                                    </TextBlock.Effect>
-                                                </TextBlock>
-                                                <TextBlock HorizontalAlignment="Center"
-                                                           FontSize="30"
-                                                           FontWeight="Light"
-                                                           Text=":">
-                                                    <TextBlock.Effect>
-                                                        <DropShadowEffect ShadowDepth="1" />
-                                                    </TextBlock.Effect>
-                                                </TextBlock>
-                                                <TextBlock HorizontalAlignment="Center"
-                                                           FontSize="30"
-                                                           FontWeight="Light"
-                                                           Text="{Binding Path=TimeScheduleToMinute}">
-                                                    <TextBlock.Effect>
-                                                        <DropShadowEffect ShadowDepth="1" />
-                                                    </TextBlock.Effect>
-                                                </TextBlock>
-                                                <TextBlock HorizontalAlignment="Center"
-                                                           FontSize="30"
-                                                           FontWeight="Light"
-                                                           Text="{Binding Path=TimeScheduleType}">
-                                                    <TextBlock.Effect>
-                                                        <DropShadowEffect ShadowDepth="1" />
-                                                    </TextBlock.Effect>
-                                                </TextBlock>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                <GridViewColumn Width="265" Header="Lastname">
-                                    <GridViewColumn.HeaderTemplate>
-                                        <DataTemplate>
-                                            <TextBlock HorizontalAlignment="Center"
-                                                       FontSize="30"
-                                                       FontWeight="Light"
-                                                       Text="Professor" />
-                                        </DataTemplate>
-                                    </GridViewColumn.HeaderTemplate>
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock HorizontalAlignment="Center"
-                                                       FontSize="30" TextWrapping="Wrap"
-                                                       FontWeight="Light"
-                                                       Text="{Binding Path=Professor}">
-                                                <TextBlock.Effect>
-                                                    <DropShadowEffect ShadowDepth="1" />
-                                                </TextBlock.Effect>
-                                            </TextBlock>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
+                                
+                                
                             </GridView.Columns>
                         </GridView>
                     </ListView.View>

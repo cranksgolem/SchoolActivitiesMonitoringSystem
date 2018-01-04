@@ -122,7 +122,7 @@
                                         <TextBlock HorizontalAlignment="Center"
                                                    FontSize="30"
                                                    FontWeight="Light"
-                                                   Text="Enrolled Classes" />
+                                                   Text="SchoolYear" />
                                     </DataTemplate>
                                 </GridViewColumn.HeaderTemplate>
                                 <GridViewColumn.CellTemplate>
@@ -130,7 +130,7 @@
                                         <TextBlock HorizontalAlignment="Center"
                                                    FontSize="40"
                                                    FontWeight="Light"
-                                                   Text="{Binding Path=NumberClass}" >
+                                                   Text="{Binding Path=Schoolyear}" >
                                             <TextBlock.Effect>
                                                 <DropShadowEffect ShadowDepth="1"></DropShadowEffect>
                                             </TextBlock.Effect>

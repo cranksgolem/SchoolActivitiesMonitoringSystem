@@ -27,16 +27,16 @@ namespace I_Need_That_A
             InitializeComponent();
             this.DataContext = ViewModelLocator.StartMenuViewModel;
 
-            SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\kncvinson\Documents\SchoolMonitoringProject2\SchoolActivitiesMonitoringSystem-AddTables\SchoolActivitiesMonitoringSystem-AddTables\Database1.mdf");
-            SqlDataAdapter sda2 = new SqlDataAdapter("SELECT SchoolYear, Description From [SUBJECT]", con);
-            DataTable dt = new DataTable();
-            sda2.Fill(dt);
+            //SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Vinson\Desktop\School\4th Year\ObjectOrientedProgramming\SchoolMonitoringSystem2\SchoolActivitiesMonitoringSystem-AddTables\Database1.mdf");
+            //SqlDataAdapter sda2 = new SqlDataAdapter("SELECT User From [USERS]", con);
+            //DataTable dt = new DataTable();
+            //sda2.Fill(dt);
 
-            for (int x = 0; x < dt.Rows.Count; x++)
-            {
-                object obmaxflowrate1 = dt.Rows[x]["Description"];
-                MessageBox.Show(obmaxflowrate1.ToString());
-            }
+            //for (int x = 0; x < dt.Rows.Count; x++)
+            //{
+            //    object obmaxflowrate1 = dt.Rows[x]["Semester_Name"];
+            //    MessageBox.Show(obmaxflowrate1.ToString());
+            //}
         }
 
         private void BtnEnter_Click(object sender, RoutedEventArgs e)

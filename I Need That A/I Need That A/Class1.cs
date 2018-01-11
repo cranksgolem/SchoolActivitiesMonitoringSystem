@@ -48,6 +48,7 @@ namespace I_Need_That_A
     public class Semester : INotifyPropertyChanged
     {
         private string _name;
+        private string _schoolyear;
         private ObservableCollection<Class> _listClasses = new ObservableCollection<Class>();
         private ObservableCollection<Activity> _listToDoList = new ObservableCollection<Activity>();
         private ObservableCollection<Activity> _listToDoListHistory = new ObservableCollection<Activity>();
@@ -158,6 +159,16 @@ namespace I_Need_That_A
             get { return _name; }
             set { _name = value;
             OnPropertyChanged(new PropertyChangedEventArgs("Name"));
+            }
+        }
+
+        public string Schoolyear
+        {
+            get { return _schoolyear; }
+            set
+            {
+                _schoolyear = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("Schoolyear"));
             }
         }
 

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +26,23 @@ namespace I_Need_That_A
         public SelectedClassWindow()
         {
             InitializeComponent();
+
+            SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Vinson\Desktop\School\4th Year\ObjectOrientedProgramming\SchoolMonitoringSystem2\SchoolActivitiesMonitoringSystem-AddTables\Database1.mdf");
+            SqlDataAdapter sda2 = new SqlDataAdapter("SELECT Activity, Percentage From [ACTIVITY]", con);
+            DataTable dt = new DataTable();
+            sda2.Fill(dt);
+
+            ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.Prelim;
+
+            for (int x = 0; x < dt.Rows.Count; x++)
+            {
+                GradingComponent newGC = new GradingComponent();
+
+                newGC.Name = dt.Rows[x]["Activity"].ToString();
+                newGC.PercentEffectOnTotalGrade = Convert.ToDouble(dt.Rows[x]["Percentage"]);
+
+                ViewModelLocator.StartMenuViewModel.AddComponent(newGC);
+            }
         }
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

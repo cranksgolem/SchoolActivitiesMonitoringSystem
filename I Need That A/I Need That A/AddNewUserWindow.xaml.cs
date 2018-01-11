@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,14 @@ namespace I_Need_That_A
         {
             if (TbxName.Text != "")
             {
+                SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Vinson\Desktop\School\4th Year\ObjectOrientedProgramming\SchoolMonitoringSystem2\SchoolActivitiesMonitoringSystem-AddTables\I Need That A\I Need That A\Database.mdf");
+                con.Open();
+                SqlDataAdapter sda2 = new SqlDataAdapter();
+                SqlCommand command = new SqlCommand();
+                command = new SqlCommand("INSERT INTO [USERS] (User_Name) VALUES (@User_Name)", con);
+                command.Parameters.AddWithValue("@User_Name", TbxName.Text);
+                command.ExecuteNonQuery();
+                con.Close();
                 DialogResult = true;
             }
 

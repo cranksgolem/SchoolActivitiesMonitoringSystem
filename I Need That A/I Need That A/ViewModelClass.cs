@@ -22,16 +22,9 @@ namespace I_Need_That_A
     [Serializable()]
     public class StartMenuViewModel
     {
-        private ObservableCollection<User> _listUsers = new ObservableCollection<User>();
-        private List<User> _saveListUsers = new List<User>();
+        private ObservableCollection<USERS> _listUsers = new ObservableCollection<USERS>();
 
-        public List<User> SaveListUsers
-        {
-            get { return _saveListUsers; }
-            set { _saveListUsers = value; }
-        }
-
-        public ObservableCollection<User> ListUsers
+        public ObservableCollection<USERS> ListUsers
         {
             get { return _listUsers; }
             set { _listUsers = value; }
@@ -39,74 +32,12 @@ namespace I_Need_That_A
 
         public StartMenuViewModel()
         {
-            //ListUsers.Add(new User("Kim Vinson"));
-            //ListUsers[0].ListSemester.Add(new Semester("First Semester", 28));
-            //ListUsers[0].ListSemester[0].ListClasses.Add(new Class("Programming 3", 5, "TTh", "1", "00", "4", "00", TimeScheduleType.PM, "Dexielito Badilles"));
-            //ListUsers[0].ListSemester[0].NumberClass += 1;
-            //ListUsers[0].ListSemester[0].UsedUnits += 5;
 
-            //ListUsers[0].ListSemester[0].ListClasses.Add(new Class("English 3", 10, "TTh", "1", "00", "4", "00", TimeScheduleType.PM, "Dexielito Badilles"));
-            //ListUsers[0].ListSemester[0].NumberClass += 1;
-            //ListUsers[0].ListSemester[0].UsedUnits += 10;
-
-            //ListUsers[0].ListSemester[0].ListClasses.Add(new Class("Physics 3", 7, "TTh", "1", "00", "4", "00", TimeScheduleType.PM, "Dexielito Badilles"));
-            //ListUsers[0].ListSemester[0].NumberClass += 1;
-            //ListUsers[0].ListSemester[0].UsedUnits += 7;
-
-            //ListUsers[0].ListSemester[0].ListClasses.Add(new Class("Psych", 6, "TTh", "1", "00", "4", "00", TimeScheduleType.PM, "Dexielito Badilles"));
-            //ListUsers[0].ListSemester[0].NumberClass += 1;
-            //ListUsers[0].ListSemester[0].UsedUnits += 6;
-
-            IFormatter formatter = new BinaryFormatter();
-
-            Stream fileStream = File.Open(AppDomain.CurrentDomain.BaseDirectory + @"UserCollection.bin", FileMode.OpenOrCreate);
-
-            try
-            {
-                SaveListUsers = (List<User>)formatter.Deserialize(fileStream);
-
-                for (int x = 0; x < SaveListUsers.Count; x++)
-                {
-                    ListUsers.Add(SaveListUsers[x]);
-                }
-            }
-
-            catch (Exception)
-            {
-
-            }
-
-            fileStream.Close();
-        }
-
-        public void SaveData()
-        {
-            try
-            {
-                SaveListUsers.Clear();
-
-                for (int x = 0; x < ListUsers.Count; x++)
-                {
-                    SaveListUsers.Add(ListUsers[x]);
-                }
-
-                IFormatter formatter = new BinaryFormatter();
-
-                Stream fileStream = File.Open(AppDomain.CurrentDomain.BaseDirectory + @"UserCollection.bin", FileMode.Create);
-
-                formatter.Serialize(fileStream, SaveListUsers);
-                fileStream.Close();
-            }
-
-            catch (Exception)
-            {
-
-            }
         }
 
         public void RemoveSemester()
         {
-            SelectedUser.ListSemester.Remove(SelectedUser.SelectedSemester);
+            //SelectedUser.ListSemester.Remove(SelectedUser.SelectedSemester);
         }
 
         public void ChangePercentEffect()
@@ -408,6 +339,11 @@ namespace I_Need_That_A
             }
         }
 
+        public void AddComponent(GradingComponent newGC)
+        {
+            SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod.ListGradingComponents.Add(newGC);
+        }
+
         public void EditComponent()
         {
             var window = new AddGradingComponentWindow();
@@ -610,7 +546,7 @@ namespace I_Need_That_A
         }
 
         public double NewPercentEffect { get; set; }
-        public User SelectedUser { get; set; }
+        public USERS SelectedUser { get; set; }
     }
 
     public static class ViewModelLocator

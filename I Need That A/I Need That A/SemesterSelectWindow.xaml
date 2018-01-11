@@ -62,7 +62,7 @@
                       Height="550" BorderThickness="3" BorderBrush="#06425C"
                       Margin="20" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       Background="#51A39D"
-                      ItemsSource="{Binding Path=ListSemester}"
+                      
                       SelectedItem="{Binding Path=SelectedSemester}">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
@@ -86,7 +86,7 @@
                                         <TextBlock HorizontalAlignment="Center"
                                                    FontSize="40"
                                                    FontWeight="Light"
-                                                   Text="{Binding Path=Name}" >
+                                                   Text="{Binding Path=SemesterName}" >
                                             <TextBlock.Effect>
                                                 <DropShadowEffect ShadowDepth="1"></DropShadowEffect>
                                             </TextBlock.Effect>
@@ -108,7 +108,7 @@
                                         <TextBlock HorizontalAlignment="Center"
                                                    FontSize="40"
                                                    FontWeight="Light"
-                                                   Text="{Binding Path=RequiredUnits}">
+                                                   Text="{Binding Path=MaxUnits}">
                                             <TextBlock.Effect>
                                                 <DropShadowEffect ShadowDepth="1"></DropShadowEffect>
                                             </TextBlock.Effect>
@@ -122,7 +122,7 @@
                                         <TextBlock HorizontalAlignment="Center"
                                                    FontSize="30"
                                                    FontWeight="Light"
-                                                   Text="Enrolled Classes" />
+                                                   Text="SchoolYear" />
                                     </DataTemplate>
                                 </GridViewColumn.HeaderTemplate>
                                 <GridViewColumn.CellTemplate>
@@ -130,7 +130,7 @@
                                         <TextBlock HorizontalAlignment="Center"
                                                    FontSize="40"
                                                    FontWeight="Light"
-                                                   Text="{Binding Path=NumberClass}" >
+                                                   Text="{Binding Path=Schoolyear}" >
                                             <TextBlock.Effect>
                                                 <DropShadowEffect ShadowDepth="1"></DropShadowEffect>
                                             </TextBlock.Effect>

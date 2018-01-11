@@ -36,7 +36,6 @@ namespace I_Need_That_A
 
         private void BtnExit_Click(object sender, RoutedEventArgs e)
         {
-            ViewModelLocator.StartMenuViewModel.SaveData();
             Application.Current.Shutdown();
         }
 

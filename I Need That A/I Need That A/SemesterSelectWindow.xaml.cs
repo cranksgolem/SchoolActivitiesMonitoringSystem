@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +12,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace I_Need_That_A
@@ -22,10 +25,33 @@ namespace I_Need_That_A
         public SemesterSelectWindow()
         {
             InitializeComponent();
+
+            var userID = ViewModelLocator.StartMenuViewModel.SelectedUser.UserID;
+
+            SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Vinson\Desktop\School\4th Year\ObjectOrientedProgramming\SchoolMonitoringSystem2\SchoolActivitiesMonitoringSystem-AddTables\I Need That A\I Need That A\Database.mdf");
+            SqlDataAdapter sda2 = new SqlDataAdapter("SELECT Semester_Name, Max_Units, Schoolyear, UserID  From [SEMESTER]" , con);
+            
+            DataTable dt = new DataTable();
+            sda2.Fill(dt);
+
+            for (int x = 0; x < dt.Rows.Count; x++)
+            {
+                if (Convert.ToInt16(dt.Rows[x]["UserID"]) == userID)
+                {
+                    SEMESTER newsem = new SEMESTER();
+
+                    newsem.SemesterName = dt.Rows[x]["Semester_Name"].ToString();
+                    newsem.MaxUnits = Convert.ToInt16(dt.Rows[x]["Max_Units"]);
+                    newsem.Schoolyear = dt.Rows[x]["Schoolyear"].ToString();
+
+                    LbListSemester.Items.Add(newsem);
+                }
+            }
         }
 
         MainWindow _mainWindow = new MainWindow();
 
+        
         private void BtnOpenAddSemester_Click(object sender, RoutedEventArgs e)
         {
             var newWindow = new AddSemesterWindow();

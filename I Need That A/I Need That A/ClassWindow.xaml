@@ -45,12 +45,12 @@
                                     <DropShadowEffect />
                                 </TextBlock.Effect>
                             </TextBlock>
-                            <TextBlock Grid.Column="0"
+                            <TextBlock x:Name="TblMaxUnits" Grid.Column="0"
                                        VerticalAlignment="Bottom"
                                        FontSize="40"
                                        FontWeight="ExtraLight"
                                        Foreground="White"
-                                       Text="{Binding Path=RequiredUnits}">
+                                       Text="">
                                 <TextBlock.Effect>
                                     <DropShadowEffect />
                                 </TextBlock.Effect>
@@ -69,12 +69,12 @@
                                     <DropShadowEffect />
                                 </TextBlock.Effect>
                             </TextBlock>
-                            <TextBlock Grid.Column="0"
+                            <TextBlock x:Name="TblUsedUnits" Grid.Column="0"
                                        VerticalAlignment="Bottom"
                                        FontSize="40"
                                        FontWeight="ExtraLight"
                                        Foreground="White"
-                                       Text="{Binding Path=UsedUnits}">
+                                       Text="">
                                 <TextBlock.Effect>
                                     <DropShadowEffect />
                                 </TextBlock.Effect>
@@ -152,13 +152,13 @@
                     <ListView.View>
                         <GridView>
                             <GridView.Columns>
-                                <GridViewColumn Width="455" Header="Lastname">
+                                <GridViewColumn Width="321" Header="Lastname">
                                     <GridViewColumn.HeaderTemplate>
                                         <DataTemplate>
                                             <TextBlock HorizontalAlignment="Center"
                                                        FontSize="30"
                                                        FontWeight="Light"
-                                                       Text="Class Name" />
+                                                       Text="Subject Code" />
                                         </DataTemplate>
                                     </GridViewColumn.HeaderTemplate>
                                     <GridViewColumn.CellTemplate>
@@ -166,7 +166,7 @@
                                             <TextBlock HorizontalAlignment="Center"
                                                        FontSize="30" TextWrapping="Wrap"
                                                        FontWeight="Light"
-                                                       Text="{Binding Path=Name}">
+                                                       Text="{Binding Path=SubjectCode}">
                                                 <TextBlock.Effect>
                                                     <DropShadowEffect ShadowDepth="1" />
                                                 </TextBlock.Effect>
@@ -174,7 +174,29 @@
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-                                <GridViewColumn Width="455" Header="Lastname">
+                                <GridViewColumn Width="341" Header="Lastname">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock HorizontalAlignment="Center"
+                                                       FontSize="30"
+                                                       FontWeight="Light"
+                                                       Text="Description" />
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock HorizontalAlignment="Center"
+                                                       FontSize="30" TextWrapping="Wrap"
+                                                       FontWeight="Light"
+                                                       Text="{Binding Path=Description}">
+                                                <TextBlock.Effect>
+                                                    <DropShadowEffect ShadowDepth="1" />
+                                                </TextBlock.Effect>
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Width="300" Header="Lastname">
                                     <GridViewColumn.HeaderTemplate>
                                         <DataTemplate>
                                             <TextBlock HorizontalAlignment="Center"
@@ -196,7 +218,7 @@
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-                                <GridViewColumn Width="455" Header="Lastname">
+                                <GridViewColumn Width="401" Header="Lastname">
                                     <GridViewColumn.HeaderTemplate>
                                         <DataTemplate>
                                             <TextBlock HorizontalAlignment="Center"
@@ -210,7 +232,7 @@
                                             <TextBlock HorizontalAlignment="Center"
                                                        FontSize="30"
                                                        FontWeight="Light"
-                                                       Text="{Binding Path=DaySchedule}">
+                                                       Text="{Binding Path=Schedule}">
                                                 <TextBlock.Effect>
                                                     <DropShadowEffect ShadowDepth="1" />
                                                 </TextBlock.Effect>

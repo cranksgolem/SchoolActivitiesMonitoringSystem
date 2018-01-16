@@ -40,13 +40,6 @@ namespace I_Need_That_A
             return User;
         }
 
-        private ObservableCollection<Semester> _listSemester = new ObservableCollection<Semester>();
-
-        public Semester SelectedSemester { get; set; }
-
-        public ObservableCollection<Semester> ListSemester
-        {
-            get { return _listSemester; }
-        }
+        public SEMESTER SelectedSemester { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace I_Need_That_A
 {
-    class SEMESTER
+    public class SEMESTER
     {
         private int _semID;
         private string _semesterName;
@@ -50,5 +50,12 @@ namespace I_Need_That_A
             get { return _userID; }
             set { _userID = value; }
         }
+
+        public SEMESTER()
+        {
+
+        }
+
+        public SUBJECT SelectedClass { get; set; }
     }
 }

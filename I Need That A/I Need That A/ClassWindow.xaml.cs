@@ -25,22 +25,43 @@ namespace I_Need_That_A
         {
             InitializeComponent();
 
-            SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Vinson\Desktop\School\4th Year\ObjectOrientedProgramming\SchoolMonitoringSystem2\SchoolActivitiesMonitoringSystem-AddTables\Database1.mdf");
-            SqlDataAdapter sda2 = new SqlDataAdapter("SELECT Description, Schedule, Units From [SUBJECT]", con);
+            var semID = SemesterSelectWindow.selectedSemesterID;
+
+            SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Vinson\Desktop\School\4th Year\ObjectOrientedProgramming\SchoolMonitoringSystem2\SchoolActivitiesMonitoringSystem-AddTables\I Need That A\I Need That A\Database.mdf");
+            SqlDataAdapter sda2 = new SqlDataAdapter("SELECT Subject_Code, Description, Schedule, Units, Grade, SemID, Subject_ID, PrelimPercent, MidtermPercent, PrefiPercent   From [SUBJECT]", con);
+
             DataTable dt = new DataTable();
             sda2.Fill(dt);
 
+            LbClassList.Items.Clear();
+            TblMaxUnits.Text = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.MaxUnits.ToString();
+            usedUnits = 0;
+
             for (int x = 0; x < dt.Rows.Count; x++)
             {
-                Class newClass = new Class();
+                if (Convert.ToInt16(dt.Rows[x]["SemID"]) == semID)
+                {
+                    SUBJECT newClass = new SUBJECT();
 
-                newClass.Name = dt.Rows[x]["Description"].ToString();
-                newClass.DaySchedule = dt.Rows[x]["Schedule"].ToString();
-                newClass.Units = Convert.ToDouble(dt.Rows[x]["Units"]);
+                    newClass.Description = dt.Rows[x]["Description"].ToString();
+                    newClass.Schedule = dt.Rows[x]["Schedule"].ToString();
+                    newClass.Units = Convert.ToInt16(dt.Rows[x]["Units"]);
+                    newClass.SubjectCode = dt.Rows[x]["Subject_Code"].ToString();
+                    newClass.SubjectID = Convert.ToInt16(dt.Rows[x]["Subject_ID"]);
+                    newClass.PrelimPercent = Convert.ToInt16(dt.Rows[x]["PrelimPercent"]);
+                    newClass.MidtermPercent = Convert.ToInt16(dt.Rows[x]["MidtermPercent"]);
+                    newClass.PrefiPercent = Convert.ToInt16(dt.Rows[x]["PrefiPercent"]);
 
-                ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.ListClasses.Add(newClass);
+                    LbClassList.Items.Add(newClass);
+                    usedUnits += newClass.Units;
+                }
+
             }
+            TblUsedUnits.Text = usedUnits.ToString();
         }
+
+        public static int usedUnits;
+        public static SUBJECT selectedSubject;
 
         private void BtnAddClass_Click(object sender, RoutedEventArgs e)
         {
@@ -48,17 +69,46 @@ namespace I_Need_That_A
             window.Owner = this;
             window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
 
-            Class newClass = new Class();
-            window.DataContext = newClass;
+        
 
             var result = window.ShowDialog();
 
             if (result == true)
             {
-                ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.ListClasses.Add(newClass);
-                ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.NumberClass += 1;
-                ViewModelLocator.StartMenuViewModel.GetQPIComponent();
-                ViewModelLocator.StartMenuViewModel.GetSemesterQPI();
+                var semID = SemesterSelectWindow.selectedSemesterID;
+
+                SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Vinson\Desktop\School\4th Year\ObjectOrientedProgramming\SchoolMonitoringSystem2\SchoolActivitiesMonitoringSystem-AddTables\I Need That A\I Need That A\Database.mdf");
+                SqlDataAdapter sda2 = new SqlDataAdapter("SELECT Subject_Code, Description, Schedule, Units, Grade, SemID, Subject_ID   From [SUBJECT]", con);
+
+                DataTable dt = new DataTable();
+                sda2.Fill(dt);
+
+                LbClassList.Items.Clear();
+                TblMaxUnits.Text = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.MaxUnits.ToString();
+                usedUnits = 0;
+
+                for (int x = 0; x < dt.Rows.Count; x++)
+                {
+                    if (Convert.ToInt16(dt.Rows[x]["SemID"]) == semID)
+                    {
+                        SUBJECT newClass = new SUBJECT();
+
+                        newClass.Description = dt.Rows[x]["Description"].ToString();
+                        newClass.Schedule = dt.Rows[x]["Schedule"].ToString();
+                        newClass.Units = Convert.ToInt16(dt.Rows[x]["Units"]);
+                        newClass.SubjectCode = dt.Rows[x]["Subject_Code"].ToString();
+                        newClass.SubjectID = Convert.ToInt16(dt.Rows[x]["Subject_ID"]);
+                        newClass.PrelimPercent = Convert.ToInt16(dt.Rows[x]["PrelimPercent"]);
+                        newClass.MidtermPercent = Convert.ToInt16(dt.Rows[x]["MidtermPercent"]);
+                        newClass.PrefiPercent = Convert.ToInt16(dt.Rows[x]["PrefiPercent"]);
+
+                        LbClassList.Items.Add(newClass);
+                        usedUnits += newClass.Units;
+                    }
+
+                }
+                TblUsedUnits.Text = usedUnits.ToString();
+
             }
 
             ViewModelLocator.StartMenuViewModel.GetSemesterTotalUsedUnits();
@@ -75,11 +125,11 @@ namespace I_Need_That_A
         {
             if (LbClassList.SelectedItem != null)
             {
-                ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.ListClasses.Remove(ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass);
-                ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.NumberClass -= 1;
-                ViewModelLocator.StartMenuViewModel.GetSemesterTotalUsedUnits();
-                ViewModelLocator.StartMenuViewModel.GetQPIComponent();
-                ViewModelLocator.StartMenuViewModel.GetSemesterQPI();
+                //ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.ListClasses.Remove(ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass);
+                //ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.NumberClass -= 1;
+                //ViewModelLocator.StartMenuViewModel.GetSemesterTotalUsedUnits();
+                //ViewModelLocator.StartMenuViewModel.GetQPIComponent();
+                //ViewModelLocator.StartMenuViewModel.GetSemesterQPI();
             }
         }
 
@@ -87,6 +137,7 @@ namespace I_Need_That_A
         {
             if (LbClassList.SelectedItem != null)
             {
+                selectedSubject = LbClassList.SelectedItem as SUBJECT;
                 var window = new SelectedClassWindow();
                 window.backToClassList = true;
                 window.Owner = this;

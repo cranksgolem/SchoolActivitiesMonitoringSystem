@@ -36,43 +36,43 @@ namespace I_Need_That_A
 
         private void BtnClear_Click(object sender, RoutedEventArgs e)
         {
-            ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.ToDoListHistory.Clear();
+            //ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.ToDoListHistory.Clear();
         }
 
         private void MIUrgency_Click(object sender, RoutedEventArgs e)
         {
-            MIImportance.IsChecked = false;
-            MIImportanceDescend.IsChecked = false;
-            MIUrgencyDescend.IsChecked = false;
-            MIUrgency.IsCheckable = true;
-            ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SortUrgencyToDoListHistory();
+            //MIImportance.IsChecked = false;
+            //MIImportanceDescend.IsChecked = false;
+            //MIUrgencyDescend.IsChecked = false;
+            //MIUrgency.IsCheckable = true;
+            //ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SortUrgencyToDoListHistory();
         }
 
         private void MIImportance_Click(object sender, RoutedEventArgs e)
         {
-            MIUrgencyDescend.IsChecked = false;
-            MIImportanceDescend.IsChecked = false;
-            MIUrgency.IsChecked = false;
-            MIImportance.IsChecked = true;
-            ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SortImportanceToDoListHistory();
+            //MIUrgencyDescend.IsChecked = false;
+            //MIImportanceDescend.IsChecked = false;
+            //MIUrgency.IsChecked = false;
+            //MIImportance.IsChecked = true;
+            //ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SortImportanceToDoListHistory();
         }
 
         private void MIUrgencyDescend_Click(object sender, RoutedEventArgs e)
         {
-            MIUrgencyDescend.IsChecked = true;
-            MIImportanceDescend.IsChecked = false;
-            MIUrgency.IsChecked = false;
-            MIImportance.IsChecked = false;
-            ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SortUrgencyToDoList2History();
+            //MIUrgencyDescend.IsChecked = true;
+            //MIImportanceDescend.IsChecked = false;
+            //MIUrgency.IsChecked = false;
+            //MIImportance.IsChecked = false;
+            //ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SortUrgencyToDoList2History();
         }
 
         private void MIImportanceDescend_Click(object sender, RoutedEventArgs e)
         {
-            MIUrgencyDescend.IsChecked = false;
-            MIImportanceDescend.IsChecked = true;
-            MIUrgency.IsChecked = false;
-            MIImportance.IsChecked = false;
-            ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SortImportanceToDoListAscendingHistory();
+            //MIUrgencyDescend.IsChecked = false;
+            //MIImportanceDescend.IsChecked = true;
+            //MIUrgency.IsChecked = false;
+            //MIImportance.IsChecked = false;
+            //ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SortImportanceToDoListAscendingHistory();
         }
     }
 }

@@ -59,38 +59,38 @@ namespace I_Need_That_A
         {
             try
             {
-                string text = TbxTotalItems.Text;
-                int textLength = text.Length;
-                if (textLength >= 1)
-                {
-                    string newText = "";
+                //string text = TbxTotalItems.Text;
+                //int textLength = text.Length;
+                //if (textLength >= 1)
+                //{
+                //    string newText = "";
 
-                    for (int x = 0; x < textLength; x++)
-                    {
-                        if (Char.IsNumber(text[x]) == true || text[x] == '.')
-                        {
-                            newText = newText + text[x];
-                        }
-                    }
+                //    for (int x = 0; x < textLength; x++)
+                //    {
+                //        if (Char.IsNumber(text[x]) == true || text[x] == '.')
+                //        {
+                //            newText = newText + text[x];
+                //        }
+                //    }
 
-                    TbxTotalItems.Text = newText;
-                }
+                //    TbxTotalItems.Text = newText;
+                //}
 
-                else
-                {
-                    TbxTotalItems.Text = "";
-                }
+                //else
+                //{
+                //    TbxTotalItems.Text = "";
+                //}
 
-                if (TbxTotalItems.Text != "" && TbxScore.Text != "" && Convert.ToDouble(TbxTotalItems.Text) != 0 && Convert.ToDouble(TbxScore.Text) != 0)
-                {
-                    double percentScore = (((Convert.ToDouble(TbxScore.Text)) / (Convert.ToDouble(TbxTotalItems.Text))) * 100) * ((100 - (ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod.SelectedGradingComponent.Base)) / 100) + ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod.SelectedGradingComponent.Base;
-                    TblPercentScore.Text = percentScore.ToString();
-                }
+                //if (TbxTotalItems.Text != "" && TbxScore.Text != "" && Convert.ToDouble(TbxTotalItems.Text) != 0 && Convert.ToDouble(TbxScore.Text) != 0)
+                //{
+                //    double percentScore = (((Convert.ToDouble(TbxScore.Text)) / (Convert.ToDouble(TbxTotalItems.Text))) * 100) * ((100 - (ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod.SelectedGradingComponent.Base)) / 100) + ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod.SelectedGradingComponent.Base;
+                //    TblPercentScore.Text = percentScore.ToString();
+                //}
 
-                else if (TbxTotalItems.Text != "" && TbxScore.Text != "" && Convert.ToDouble(TbxTotalItems.Text) != 0 && Convert.ToDouble(TbxScore.Text) == 0)
-                {
-                    TblPercentScore.Text = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod.SelectedGradingComponent.Base.ToString();
-                }
+                //else if (TbxTotalItems.Text != "" && TbxScore.Text != "" && Convert.ToDouble(TbxTotalItems.Text) != 0 && Convert.ToDouble(TbxScore.Text) == 0)
+                //{
+                //    TblPercentScore.Text = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod.SelectedGradingComponent.Base.ToString();
+                //}
             }
 
             catch (Exception)
@@ -147,13 +147,13 @@ namespace I_Need_That_A
 
                 if (TbxTotalItems.Text != "" && TbxScore.Text != "" && Convert.ToDouble(TbxTotalItems.Text) != 0 && Convert.ToDouble(TbxScore.Text) != 0)
                 {
-                    double percentScore = (((Convert.ToDouble(TbxScore.Text)) / (Convert.ToDouble(TbxTotalItems.Text))) * 100) * ((100 - (ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod.SelectedGradingComponent.Base)) / 100) + ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod.SelectedGradingComponent.Base;
-                    TblPercentScore.Text = percentScore.ToString();
+                    //double percentScore = (((Convert.ToDouble(TbxScore.Text)) / (Convert.ToDouble(TbxTotalItems.Text))) * 100) * ((100 - (ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod.SelectedGradingComponent.Base)) / 100) + ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod.SelectedGradingComponent.Base;
+                    //TblPercentScore.Text = percentScore.ToString();
                 }
 
                 else if (TbxTotalItems.Text != "" && TbxScore.Text != "" && Convert.ToDouble(TbxTotalItems.Text) != 0 && Convert.ToDouble(TbxScore.Text) == 0)
                 {
-                    TblPercentScore.Text = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod.SelectedGradingComponent.Base.ToString();
+                    //TblPercentScore.Text = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod.SelectedGradingComponent.Base.ToString();
                 }
             }
 

@@ -66,7 +66,7 @@
                          Margin="60,10,0,0"
                          HorizontalAlignment="left"
                          FontSize="20"
-                         Text="{Binding Path=Name}" />
+                         Text="{Binding Path=SemesterName}" />
             </StackPanel>
             <StackPanel Orientation="Vertical">
                 <TextBlock Margin="60,50,0,0"
@@ -80,7 +80,21 @@
                          Margin="60,10,0,0"
                          HorizontalAlignment="Left"
                          FontSize="20"
-                         Text="{Binding Path=RequiredUnits}" />
+                         Text="{Binding Path=MaxUnits}" />
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Margin="60,50,0,0"
+                           FontFamily="Century Gothic"
+                           FontSize="30"
+                           FontWeight="ExtraLight"
+                           Foreground="#51A39D"
+                           Text="School Year" />
+                <TextBox x:Name="TbxSchoolYear" MinWidth="540"
+                         MinHeight="30"
+                         Margin="60,10,0,0"
+                         HorizontalAlignment="Left"
+                         FontSize="20"
+                         Text="{Binding Path=Schoolyear}" />
             </StackPanel>
         </StackPanel>
     </Grid>

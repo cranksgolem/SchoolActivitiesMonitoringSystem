@@ -27,28 +27,69 @@ namespace I_Need_That_A
         {
             InitializeComponent();
 
-            SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Vinson\Desktop\School\4th Year\ObjectOrientedProgramming\SchoolMonitoringSystem2\SchoolActivitiesMonitoringSystem-AddTables\Database1.mdf");
-            SqlDataAdapter sda2 = new SqlDataAdapter("SELECT Activity, Percentage From [ACTIVITY]", con);
+            TblPrelimPercent.Text = ClassWindow.selectedSubject.PrelimPercent.ToString();
+            TblMidtermPercent.Text = ClassWindow.selectedSubject.MidtermPercent.ToString();
+            TblPrefiPercent.Text = ClassWindow.selectedSubject.PrefiPercent.ToString();
+            SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Vinson\Desktop\School\4th Year\ObjectOrientedProgramming\SchoolMonitoringSystem2\SchoolActivitiesMonitoringSystem-AddTables\I Need That A\I Need That A\Database.mdf");
+            SqlDataAdapter sda2 = new SqlDataAdapter("SELECT * From [ACTIVITY]", con);
+
             DataTable dt = new DataTable();
             sda2.Fill(dt);
+            LvPrelimComponents.Items.Clear();
+            LvMidtermComponents.Items.Clear();
+            LvPrefinalComponents.Items.Clear();
 
-            ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.Prelim;
+            totalPercentage = 0;
 
             for (int x = 0; x < dt.Rows.Count; x++)
             {
-                GradingComponent newGC = new GradingComponent();
+                if (dt.Rows[x]["Grading_Period"].ToString() == "Prelim" && Convert.ToInt16(dt.Rows[x]["Subject_ID"]) == ClassWindow.selectedSubject.SubjectID)
+                {
+                    ACTIVITY newGC = new ACTIVITY();
 
-                newGC.Name = dt.Rows[x]["Activity"].ToString();
-                newGC.PercentEffectOnTotalGrade = Convert.ToDouble(dt.Rows[x]["Percentage"]);
+                    newGC.Activity = dt.Rows[x]["Activity"].ToString();
+                    newGC.Percentage = Convert.ToDouble(dt.Rows[x]["Percentage"]);
+                    newGC.Grade = Convert.ToDouble(dt.Rows[x]["Grade"]);
 
-                ViewModelLocator.StartMenuViewModel.AddComponent(newGC);
+                    totalPercentage += newGC.Percentage;
+
+                    LvPrelimComponents.Items.Add(newGC);
+                }
+                if (dt.Rows[x]["Grading_Period"].ToString() == "Midterm" && Convert.ToInt16(dt.Rows[x]["Subject_ID"]) == ClassWindow.selectedSubject.SubjectID)
+                {
+                    ACTIVITY newGC = new ACTIVITY();
+
+                    newGC.Activity = dt.Rows[x]["Activity"].ToString();
+                    newGC.Percentage = Convert.ToDouble(dt.Rows[x]["Percentage"]);
+                    newGC.Grade = Convert.ToDouble(dt.Rows[x]["Grade"]);
+
+                    totalPercentage += newGC.Percentage;
+
+                    LvMidtermComponents.Items.Add(newGC);
+                }
+                if (dt.Rows[x]["Grading_Period"].ToString() == "Prefi" && Convert.ToInt16(dt.Rows[x]["Subject_ID"]) == ClassWindow.selectedSubject.SubjectID)
+                {
+                    ACTIVITY newGC = new ACTIVITY();
+
+                    newGC.Activity = dt.Rows[x]["Activity"].ToString();
+                    newGC.Percentage = Convert.ToDouble(dt.Rows[x]["Percentage"]);
+                    newGC.Grade = Convert.ToDouble(dt.Rows[x]["Grade"]);
+
+                    totalPercentage += newGC.Percentage;
+
+                    LvPrefinalComponents.Items.Add(newGC);
+                }
             }
         }
+
+        public static double totalPercentage;
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
         }
+
+        public static int gradingPeriodSelect;
 
         private void BtnReturn_Click(object sender, RoutedEventArgs e)
         {
@@ -74,37 +115,111 @@ namespace I_Need_That_A
 
         private void BtnChangePercentEffectPrelim_Click(object sender, RoutedEventArgs e)
         {
-            ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.Prelim;
-            ViewModelLocator.StartMenuViewModel.ChangePercentEffect();
-            ViewModelLocator.StartMenuViewModel.GetDecimalEffect();
-            ViewModelLocator.StartMenuViewModel.GetFinalGrade();
-            ViewModelLocator.StartMenuViewModel.GetClassFinalGrade();
-            ViewModelLocator.StartMenuViewModel.GetClassLetterGrade();
-            ViewModelLocator.StartMenuViewModel.GetQPIComponent();
-            ViewModelLocator.StartMenuViewModel.GetSemesterQPI();
+            //ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.Prelim;
+            //ViewModelLocator.StartMenuViewModel.ChangePercentEffect();
+            //ViewModelLocator.StartMenuViewModel.GetDecimalEffect();
+            //ViewModelLocator.StartMenuViewModel.GetFinalGrade();
+            //ViewModelLocator.StartMenuViewModel.GetClassFinalGrade();
+            //ViewModelLocator.StartMenuViewModel.GetClassLetterGrade();
+            //ViewModelLocator.StartMenuViewModel.GetQPIComponent();
+            //ViewModelLocator.StartMenuViewModel.GetSemesterQPI();
+
+            gradingPeriodSelect = 1;
+            var window = new ChangePercentEffectOnTotalGradeWindow();
+            window.Owner = this;
+            window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+
+            var result = window.ShowDialog();
+
+            if (result == true)
+            {
+
+            }
+
         }
 
         private void BtnAddComponent_Click(object sender, RoutedEventArgs e)
         {
-            LvPrelimComponents.SelectedItem = null;
-            ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.Prelim;
-            ViewModelLocator.StartMenuViewModel.AddNewComponent();
-            ViewModelLocator.StartMenuViewModel.GetGradingComponentsPercentTotal();
-            ViewModelLocator.StartMenuViewModel.GetLetterGrade();
-            ViewModelLocator.StartMenuViewModel.GetFinalGrade();
-            ViewModelLocator.StartMenuViewModel.GetClassFinalGrade();
-            ViewModelLocator.StartMenuViewModel.GetClassLetterGrade();
-            ViewModelLocator.StartMenuViewModel.GetQPIComponent();
-            ViewModelLocator.StartMenuViewModel.GetSemesterQPI();
+            gradingPeriodSelect = 1;
+            var window = new AddGradingComponentWindow();
+            window.Owner = this;
+            window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+
+            var result = window.ShowDialog();
+
+            if (result == true)
+            {
+                SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Vinson\Desktop\School\4th Year\ObjectOrientedProgramming\SchoolMonitoringSystem2\SchoolActivitiesMonitoringSystem-AddTables\I Need That A\I Need That A\Database.mdf");
+                SqlDataAdapter sda2 = new SqlDataAdapter("SELECT * From [ACTIVITY]", con);
+
+                DataTable dt = new DataTable();
+                sda2.Fill(dt);
+                LvPrelimComponents.Items.Clear();
+                LvMidtermComponents.Items.Clear();
+                LvPrefinalComponents.Items.Clear();
+
+                totalPercentage = 0;
+
+                for (int x = 0; x < dt.Rows.Count; x++)
+                {
+                    if (dt.Rows[x]["Grading_Period"].ToString() == "Prelim" && Convert.ToInt16(dt.Rows[x]["Subject_ID"]) == ClassWindow.selectedSubject.SubjectID)
+                    {
+                        ACTIVITY newGC = new ACTIVITY();
+
+                        newGC.Activity = dt.Rows[x]["Activity"].ToString();
+                        newGC.Percentage = Convert.ToDouble(dt.Rows[x]["Percentage"]);
+                        newGC.Grade = Convert.ToDouble(dt.Rows[x]["Grade"]);
+
+                        totalPercentage += newGC.Percentage;
+
+                        LvPrelimComponents.Items.Add(newGC);
+                    }
+                    if (dt.Rows[x]["Grading_Period"].ToString() == "Midterm" && Convert.ToInt16(dt.Rows[x]["Subject_ID"]) == ClassWindow.selectedSubject.SubjectID)
+                    {
+                        ACTIVITY newGC = new ACTIVITY();
+
+                        newGC.Activity = dt.Rows[x]["Activity"].ToString();
+                        newGC.Percentage = Convert.ToDouble(dt.Rows[x]["Percentage"]);
+                        newGC.Grade = Convert.ToDouble(dt.Rows[x]["Grade"]);
+
+                        totalPercentage += newGC.Percentage;
+
+                        LvMidtermComponents.Items.Add(newGC);
+                    }
+                    if (dt.Rows[x]["Grading_Period"].ToString() == "Prefi" && Convert.ToInt16(dt.Rows[x]["Subject_ID"]) == ClassWindow.selectedSubject.SubjectID)
+                    {
+                        ACTIVITY newGC = new ACTIVITY();
+
+                        newGC.Activity = dt.Rows[x]["Activity"].ToString();
+                        newGC.Percentage = Convert.ToDouble(dt.Rows[x]["Percentage"]);
+                        newGC.Grade = Convert.ToDouble(dt.Rows[x]["Grade"]);
+
+                        totalPercentage += newGC.Percentage;
+
+                        LvPrefinalComponents.Items.Add(newGC);
+                    }
+                }
+
+            }
+            //LvPrelimComponents.SelectedItem = null;
+            //ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.Prelim;
+            //ViewModelLocator.StartMenuViewModel.AddNewComponent();
+            //ViewModelLocator.StartMenuViewModel.GetGradingComponentsPercentTotal();
+            //ViewModelLocator.StartMenuViewModel.GetLetterGrade();
+            //ViewModelLocator.StartMenuViewModel.GetFinalGrade();
+            //ViewModelLocator.StartMenuViewModel.GetClassFinalGrade();
+            //ViewModelLocator.StartMenuViewModel.GetClassLetterGrade();
+            //ViewModelLocator.StartMenuViewModel.GetQPIComponent();
+            //ViewModelLocator.StartMenuViewModel.GetSemesterQPI();
         }
 
         private void LvPrelimComponents_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (LvPrelimComponents.SelectedItem != null)
-            {
-                ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.Prelim;
-                ViewModelLocator.StartMenuViewModel.OpenGradingComponent();
-            }
+            //if (LvPrelimComponents.SelectedItem != null)
+            //{
+            //    ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.Prelim;
+            //    ViewModelLocator.StartMenuViewModel.OpenGradingComponent();
+            //}
         }
 
         private void LvPrelimComponents_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -117,109 +232,109 @@ namespace I_Need_That_A
 
         private void BtnRemoveComponent_Click(object sender, RoutedEventArgs e)
         {
-            if (LvPrelimComponents.SelectedItem != null)
-            {
-                ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.Prelim;
-                ViewModelLocator.StartMenuViewModel.RemoveComponent();
-                ViewModelLocator.StartMenuViewModel.GetGradingComponentsPercentTotal();
-                ViewModelLocator.StartMenuViewModel.GetGradingPeriodGrade();
-                ViewModelLocator.StartMenuViewModel.GetLetterGrade();
-                ViewModelLocator.StartMenuViewModel.GetFinalGrade();
-                ViewModelLocator.StartMenuViewModel.GetClassFinalGrade();
-                ViewModelLocator.StartMenuViewModel.GetClassLetterGrade();
-                ViewModelLocator.StartMenuViewModel.GetQPIComponent();
-                ViewModelLocator.StartMenuViewModel.GetSemesterQPI();
-            }
+            //if (LvPrelimComponents.SelectedItem != null)
+            //{
+            //    ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.Prelim;
+            //    ViewModelLocator.StartMenuViewModel.RemoveComponent();
+            //    ViewModelLocator.StartMenuViewModel.GetGradingComponentsPercentTotal();
+            //    ViewModelLocator.StartMenuViewModel.GetGradingPeriodGrade();
+            //    ViewModelLocator.StartMenuViewModel.GetLetterGrade();
+            //    ViewModelLocator.StartMenuViewModel.GetFinalGrade();
+            //    ViewModelLocator.StartMenuViewModel.GetClassFinalGrade();
+            //    ViewModelLocator.StartMenuViewModel.GetClassLetterGrade();
+            //    ViewModelLocator.StartMenuViewModel.GetQPIComponent();
+            //    ViewModelLocator.StartMenuViewModel.GetSemesterQPI();
+            //}
         }
 
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
-            if (LvPrelimComponents.SelectedItem != null)
-            {
-                ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.Prelim;
-                ViewModelLocator.StartMenuViewModel.EditComponent();
-                ViewModelLocator.StartMenuViewModel.GetGradingComponentsPercentTotal();
-                ViewModelLocator.StartMenuViewModel.GetComponentFinalGrade();
-                ViewModelLocator.StartMenuViewModel.GetConvertedGrade();
-                ViewModelLocator.StartMenuViewModel.GetGradingPeriodGrade();
-                ViewModelLocator.StartMenuViewModel.GetLetterGrade();
-                ViewModelLocator.StartMenuViewModel.GetFinalGrade();
-                ViewModelLocator.StartMenuViewModel.GetClassFinalGrade();
-                ViewModelLocator.StartMenuViewModel.GetClassLetterGrade();
-                ViewModelLocator.StartMenuViewModel.GetQPIComponent();
-                ViewModelLocator.StartMenuViewModel.GetSemesterQPI();
-            }
+            //if (LvPrelimComponents.SelectedItem != null)
+            //{
+            //    ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.Prelim;
+            //    ViewModelLocator.StartMenuViewModel.EditComponent();
+            //    ViewModelLocator.StartMenuViewModel.GetGradingComponentsPercentTotal();
+            //    ViewModelLocator.StartMenuViewModel.GetComponentFinalGrade();
+            //    ViewModelLocator.StartMenuViewModel.GetConvertedGrade();
+            //    ViewModelLocator.StartMenuViewModel.GetGradingPeriodGrade();
+            //    ViewModelLocator.StartMenuViewModel.GetLetterGrade();
+            //    ViewModelLocator.StartMenuViewModel.GetFinalGrade();
+            //    ViewModelLocator.StartMenuViewModel.GetClassFinalGrade();
+            //    ViewModelLocator.StartMenuViewModel.GetClassLetterGrade();
+            //    ViewModelLocator.StartMenuViewModel.GetQPIComponent();
+            //    ViewModelLocator.StartMenuViewModel.GetSemesterQPI();
+            //}
         }
 
         private void BtnChangePercentEffectMidterm_Click(object sender, RoutedEventArgs e)
         {
-            ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.Midterm;
-            ViewModelLocator.StartMenuViewModel.ChangePercentEffect();
-            ViewModelLocator.StartMenuViewModel.GetDecimalEffect();
-            ViewModelLocator.StartMenuViewModel.GetFinalGrade();
-            ViewModelLocator.StartMenuViewModel.GetClassFinalGrade();
-            ViewModelLocator.StartMenuViewModel.GetClassLetterGrade();
-            ViewModelLocator.StartMenuViewModel.GetQPIComponent();
-            ViewModelLocator.StartMenuViewModel.GetSemesterQPI();
+            //ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.Midterm;
+            //ViewModelLocator.StartMenuViewModel.ChangePercentEffect();
+            //ViewModelLocator.StartMenuViewModel.GetDecimalEffect();
+            //ViewModelLocator.StartMenuViewModel.GetFinalGrade();
+            //ViewModelLocator.StartMenuViewModel.GetClassFinalGrade();
+            //ViewModelLocator.StartMenuViewModel.GetClassLetterGrade();
+            //ViewModelLocator.StartMenuViewModel.GetQPIComponent();
+            //ViewModelLocator.StartMenuViewModel.GetSemesterQPI();
         }
 
         private void BtnAddComponentMidterm_Click(object sender, RoutedEventArgs e)
         {
-            LvMidtermComponents.SelectedItem = null;
-            ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.Midterm;
-            ViewModelLocator.StartMenuViewModel.AddNewComponent();
-            ViewModelLocator.StartMenuViewModel.GetGradingComponentsPercentTotal();
-            ViewModelLocator.StartMenuViewModel.GetLetterGrade();
-            ViewModelLocator.StartMenuViewModel.GetFinalGrade();
-            ViewModelLocator.StartMenuViewModel.GetClassFinalGrade();
-            ViewModelLocator.StartMenuViewModel.GetClassLetterGrade();
-            ViewModelLocator.StartMenuViewModel.GetQPIComponent();
-            ViewModelLocator.StartMenuViewModel.GetSemesterQPI();
+            //LvMidtermComponents.SelectedItem = null;
+            //ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.Midterm;
+            //ViewModelLocator.StartMenuViewModel.AddNewComponent();
+            //ViewModelLocator.StartMenuViewModel.GetGradingComponentsPercentTotal();
+            //ViewModelLocator.StartMenuViewModel.GetLetterGrade();
+            //ViewModelLocator.StartMenuViewModel.GetFinalGrade();
+            //ViewModelLocator.StartMenuViewModel.GetClassFinalGrade();
+            //ViewModelLocator.StartMenuViewModel.GetClassLetterGrade();
+            //ViewModelLocator.StartMenuViewModel.GetQPIComponent();
+            //ViewModelLocator.StartMenuViewModel.GetSemesterQPI();
         }
 
         private void BtnEditMidterm_Click(object sender, RoutedEventArgs e)
         {
-            if (LvMidtermComponents.SelectedItem != null)
-            {
-                ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.Midterm;
-                ViewModelLocator.StartMenuViewModel.EditComponent();
-                ViewModelLocator.StartMenuViewModel.GetGradingComponentsPercentTotal();
-                ViewModelLocator.StartMenuViewModel.GetComponentFinalGrade();
-                ViewModelLocator.StartMenuViewModel.GetConvertedGrade();
-                ViewModelLocator.StartMenuViewModel.GetGradingPeriodGrade();
-                ViewModelLocator.StartMenuViewModel.GetLetterGrade();
-                ViewModelLocator.StartMenuViewModel.GetFinalGrade();
-                ViewModelLocator.StartMenuViewModel.GetClassFinalGrade();
-                ViewModelLocator.StartMenuViewModel.GetClassLetterGrade();
-                ViewModelLocator.StartMenuViewModel.GetQPIComponent();
-                ViewModelLocator.StartMenuViewModel.GetSemesterQPI();
-            }
+            //if (LvMidtermComponents.SelectedItem != null)
+            //{
+            //    ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.Midterm;
+            //    ViewModelLocator.StartMenuViewModel.EditComponent();
+            //    ViewModelLocator.StartMenuViewModel.GetGradingComponentsPercentTotal();
+            //    ViewModelLocator.StartMenuViewModel.GetComponentFinalGrade();
+            //    ViewModelLocator.StartMenuViewModel.GetConvertedGrade();
+            //    ViewModelLocator.StartMenuViewModel.GetGradingPeriodGrade();
+            //    ViewModelLocator.StartMenuViewModel.GetLetterGrade();
+            //    ViewModelLocator.StartMenuViewModel.GetFinalGrade();
+            //    ViewModelLocator.StartMenuViewModel.GetClassFinalGrade();
+            //    ViewModelLocator.StartMenuViewModel.GetClassLetterGrade();
+            //    ViewModelLocator.StartMenuViewModel.GetQPIComponent();
+            //    ViewModelLocator.StartMenuViewModel.GetSemesterQPI();
+            //}
         }
 
         private void BtnRemoveComponentMidterm_Click(object sender, RoutedEventArgs e)
         {
-            if (LvMidtermComponents.SelectedItem != null)
-            {
-                ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.Midterm;
-                ViewModelLocator.StartMenuViewModel.RemoveComponent();
-                ViewModelLocator.StartMenuViewModel.GetGradingComponentsPercentTotal();
-                ViewModelLocator.StartMenuViewModel.GetGradingPeriodGrade();
-                ViewModelLocator.StartMenuViewModel.GetLetterGrade();
-                ViewModelLocator.StartMenuViewModel.GetFinalGrade();
-                ViewModelLocator.StartMenuViewModel.GetClassFinalGrade();
-                ViewModelLocator.StartMenuViewModel.GetClassLetterGrade();
-                ViewModelLocator.StartMenuViewModel.GetQPIComponent();
-                ViewModelLocator.StartMenuViewModel.GetSemesterQPI();
-            }
+            //if (LvMidtermComponents.SelectedItem != null)
+            //{
+            //    ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.Midterm;
+            //    ViewModelLocator.StartMenuViewModel.RemoveComponent();
+            //    ViewModelLocator.StartMenuViewModel.GetGradingComponentsPercentTotal();
+            //    ViewModelLocator.StartMenuViewModel.GetGradingPeriodGrade();
+            //    ViewModelLocator.StartMenuViewModel.GetLetterGrade();
+            //    ViewModelLocator.StartMenuViewModel.GetFinalGrade();
+            //    ViewModelLocator.StartMenuViewModel.GetClassFinalGrade();
+            //    ViewModelLocator.StartMenuViewModel.GetClassLetterGrade();
+            //    ViewModelLocator.StartMenuViewModel.GetQPIComponent();
+            //    ViewModelLocator.StartMenuViewModel.GetSemesterQPI();
+            //}
         }
 
         private void LvMidtermComponents_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (LvMidtermComponents.SelectedItem != null)
-            {
-                ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.Midterm;
-                ViewModelLocator.StartMenuViewModel.OpenGradingComponent();
-            }
+            //if (LvMidtermComponents.SelectedItem != null)
+            //{
+            //    ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.Midterm;
+            //    ViewModelLocator.StartMenuViewModel.OpenGradingComponent();
+            //}
         }
 
         private void LvMidtermComponents_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -232,73 +347,73 @@ namespace I_Need_That_A
 
         private void BtnAddComponentPrefinal_Click(object sender, RoutedEventArgs e)
         {
-            LvPrefinalComponents.SelectedItem = null;
-            ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.Prefi;
-            ViewModelLocator.StartMenuViewModel.AddNewComponent();
-            ViewModelLocator.StartMenuViewModel.GetGradingComponentsPercentTotal();
-            ViewModelLocator.StartMenuViewModel.GetLetterGrade();
-            ViewModelLocator.StartMenuViewModel.GetFinalGrade();
-            ViewModelLocator.StartMenuViewModel.GetClassFinalGrade();
-            ViewModelLocator.StartMenuViewModel.GetClassLetterGrade();
-            ViewModelLocator.StartMenuViewModel.GetQPIComponent();
-            ViewModelLocator.StartMenuViewModel.GetSemesterQPI();
+            //LvPrefinalComponents.SelectedItem = null;
+            //ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.Prefi;
+            //ViewModelLocator.StartMenuViewModel.AddNewComponent();
+            //ViewModelLocator.StartMenuViewModel.GetGradingComponentsPercentTotal();
+            //ViewModelLocator.StartMenuViewModel.GetLetterGrade();
+            //ViewModelLocator.StartMenuViewModel.GetFinalGrade();
+            //ViewModelLocator.StartMenuViewModel.GetClassFinalGrade();
+            //ViewModelLocator.StartMenuViewModel.GetClassLetterGrade();
+            //ViewModelLocator.StartMenuViewModel.GetQPIComponent();
+            //ViewModelLocator.StartMenuViewModel.GetSemesterQPI();
         }
 
         private void BtnChangePercentEffectPrefinal_Click(object sender, RoutedEventArgs e)
         {
-            ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.Prefi;
-            ViewModelLocator.StartMenuViewModel.ChangePercentEffect();
-            ViewModelLocator.StartMenuViewModel.GetDecimalEffect();
-            ViewModelLocator.StartMenuViewModel.GetFinalGrade();
-            ViewModelLocator.StartMenuViewModel.GetClassFinalGrade();
-            ViewModelLocator.StartMenuViewModel.GetClassLetterGrade();
-            ViewModelLocator.StartMenuViewModel.GetQPIComponent();
+            //ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.Prefi;
+            //ViewModelLocator.StartMenuViewModel.ChangePercentEffect();
+            //ViewModelLocator.StartMenuViewModel.GetDecimalEffect();
+            //ViewModelLocator.StartMenuViewModel.GetFinalGrade();
+            //ViewModelLocator.StartMenuViewModel.GetClassFinalGrade();
+            //ViewModelLocator.StartMenuViewModel.GetClassLetterGrade();
+            //ViewModelLocator.StartMenuViewModel.GetQPIComponent();
             ViewModelLocator.StartMenuViewModel.GetSemesterQPI();
         }
 
         private void BtnEditPrefinal_Click(object sender, RoutedEventArgs e)
         {
-            if (LvPrefinalComponents.SelectedItem != null)
-            {
-                ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.Prefi;
-                ViewModelLocator.StartMenuViewModel.EditComponent();
-                ViewModelLocator.StartMenuViewModel.GetGradingComponentsPercentTotal();
-                ViewModelLocator.StartMenuViewModel.GetComponentFinalGrade();
-                ViewModelLocator.StartMenuViewModel.GetConvertedGrade();
-                ViewModelLocator.StartMenuViewModel.GetGradingPeriodGrade();
-                ViewModelLocator.StartMenuViewModel.GetLetterGrade();
-                ViewModelLocator.StartMenuViewModel.GetFinalGrade();
-                ViewModelLocator.StartMenuViewModel.GetClassFinalGrade();
-                ViewModelLocator.StartMenuViewModel.GetClassLetterGrade();
-                ViewModelLocator.StartMenuViewModel.GetQPIComponent();
-                ViewModelLocator.StartMenuViewModel.GetSemesterQPI();
-            }
+            //if (LvPrefinalComponents.SelectedItem != null)
+            //{
+            //    ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.Prefi;
+            //    ViewModelLocator.StartMenuViewModel.EditComponent();
+            //    ViewModelLocator.StartMenuViewModel.GetGradingComponentsPercentTotal();
+            //    ViewModelLocator.StartMenuViewModel.GetComponentFinalGrade();
+            //    ViewModelLocator.StartMenuViewModel.GetConvertedGrade();
+            //    ViewModelLocator.StartMenuViewModel.GetGradingPeriodGrade();
+            //    ViewModelLocator.StartMenuViewModel.GetLetterGrade();
+            //    ViewModelLocator.StartMenuViewModel.GetFinalGrade();
+            //    ViewModelLocator.StartMenuViewModel.GetClassFinalGrade();
+            //    ViewModelLocator.StartMenuViewModel.GetClassLetterGrade();
+            //    ViewModelLocator.StartMenuViewModel.GetQPIComponent();
+            //    ViewModelLocator.StartMenuViewModel.GetSemesterQPI();
+            //}
         }
 
         private void BtnRemoveComponentPrefinal_Click(object sender, RoutedEventArgs e)
         {
-            if (LvPrefinalComponents.SelectedItem != null)
-            {
-                ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.Prefi;
-                ViewModelLocator.StartMenuViewModel.RemoveComponent();
-                ViewModelLocator.StartMenuViewModel.GetGradingComponentsPercentTotal();
-                ViewModelLocator.StartMenuViewModel.GetGradingPeriodGrade();
-                ViewModelLocator.StartMenuViewModel.GetLetterGrade();
-                ViewModelLocator.StartMenuViewModel.GetFinalGrade();
-                ViewModelLocator.StartMenuViewModel.GetClassFinalGrade();
-                ViewModelLocator.StartMenuViewModel.GetClassLetterGrade();
-                ViewModelLocator.StartMenuViewModel.GetQPIComponent();
-                ViewModelLocator.StartMenuViewModel.GetSemesterQPI();
-            }
+            //if (LvPrefinalComponents.SelectedItem != null)
+            //{
+            //    ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.Prefi;
+            //    ViewModelLocator.StartMenuViewModel.RemoveComponent();
+            //    ViewModelLocator.StartMenuViewModel.GetGradingComponentsPercentTotal();
+            //    ViewModelLocator.StartMenuViewModel.GetGradingPeriodGrade();
+            //    ViewModelLocator.StartMenuViewModel.GetLetterGrade();
+            //    ViewModelLocator.StartMenuViewModel.GetFinalGrade();
+            //    ViewModelLocator.StartMenuViewModel.GetClassFinalGrade();
+            //    ViewModelLocator.StartMenuViewModel.GetClassLetterGrade();
+            //    ViewModelLocator.StartMenuViewModel.GetQPIComponent();
+            //    ViewModelLocator.StartMenuViewModel.GetSemesterQPI();
+            //}
         }
 
         private void LvPrefinalComponents_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (LvPrefinalComponents.SelectedItem != null)
-            {
-                ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.Prefi;
-                ViewModelLocator.StartMenuViewModel.OpenGradingComponent();
-            }
+            //if (LvPrefinalComponents.SelectedItem != null)
+            //{
+            //    ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.SelectedGradingPeriod = ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.SelectedClass.Prefi;
+            //    ViewModelLocator.StartMenuViewModel.OpenGradingComponent();
+            //}
         }
 
         private void LvPrefinalComponents_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

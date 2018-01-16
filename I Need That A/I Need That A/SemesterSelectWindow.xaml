@@ -62,7 +62,6 @@
                       Height="550" BorderThickness="3" BorderBrush="#06425C"
                       Margin="20" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       Background="#51A39D"
-                      
                       SelectedItem="{Binding Path=SelectedSemester}">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">

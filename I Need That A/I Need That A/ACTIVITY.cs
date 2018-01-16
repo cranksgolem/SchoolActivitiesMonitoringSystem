@@ -10,8 +10,29 @@ namespace I_Need_That_A
     {
         private int _activityID;
         private string _activity;
-        private int _percentage;
-        private int _subjectCode;
+        private double _percentage;
+        private int _subjectID;
+        private string _gradingPeriod;
+        private double _grade;
+        private string _gradingType;
+
+        public string GradingType
+        {
+            get { return _gradingType; }
+            set { _gradingType = value; }
+        }
+
+        public double Grade
+        {
+            get { return _grade; }
+            set { _grade = value; }
+        }
+
+        public string GradingPeriod
+        {
+            get { return _gradingPeriod; }
+            set { _gradingPeriod = value; }
+        }
 
         public int ActivityID
         {
@@ -25,16 +46,21 @@ namespace I_Need_That_A
             set { _activity = value; }
         }
 
-        public int Percentage
+        public double Percentage
         {
             get { return _percentage; }
             set { _percentage = value; }
         }
 
-        public int SubjectCode
+        public int SubjectID
         {
-            get { return _subjectCode; }
-            set { _subjectCode = value; }
+            get { return _subjectID; }
+            set { _subjectID = value; }
+        }
+
+        public ACTIVITY()
+        {
+                
         }
     }
 }

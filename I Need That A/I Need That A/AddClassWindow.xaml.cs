@@ -1,16 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace I_Need_That_A
 {
@@ -27,7 +19,7 @@ namespace I_Need_That_A
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            if (TbxClassName.Text != "" && TbxUnits.Text != "" && TbxDaySched.Text != "" && TbxTimeSchedFromHour.Text != "" && TbxTimeSchedFromMinute.Text != "" && TbxTimeSchedToHour.Text != "" && TbxTimeSchedToMinute.Text != "" && CmbTimeSchedType.SelectedItem != null && TbxProfessor.Text != "")
+            if (TbxSubjectCode.Text != "" && TbxUnits.Text != "" && TbxDaySched.Text != "" && TbxTimeSchedFromHour.Text != "" && TbxTimeSchedFromMinute.Text != "" && TbxTimeSchedToHour.Text != "" && TbxTimeSchedToMinute.Text != "" && CmbTimeSchedType.SelectedItem != null && TbxDescription.Text != "")
             {
                 if (Convert.ToInt16(TbxTimeSchedFromHour.Text) > 12 || Convert.ToInt16(TbxTimeSchedToHour.Text) > 12 || Convert.ToInt16(TbxTimeSchedFromMinute.Text) > 59 || Convert.ToInt16(TbxTimeSchedToMinute.Text) > 59)
                 {
@@ -39,13 +31,29 @@ namespace I_Need_That_A
                     MessageBox.Show("Invalid time format! Please follow the format 00:00", "Invalid Time Format", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
 
-                else if (ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.UsedUnits + Convert.ToDouble(TbxUnits.Text) > ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.RequiredUnits)
+                else if (ClassWindow.usedUnits + Convert.ToDouble(TbxUnits.Text) > ViewModelLocator.StartMenuViewModel.SelectedUser.SelectedSemester.MaxUnits)
                 {
                     MessageBox.Show("Not enough available units!", "Insufficient Available Units", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
 
                 else
                 {
+                    SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Vinson\Desktop\School\4th Year\ObjectOrientedProgramming\SchoolMonitoringSystem2\SchoolActivitiesMonitoringSystem-AddTables\I Need That A\I Need That A\Database.mdf");
+                    con.Open();
+                    SqlDataAdapter sda2 = new SqlDataAdapter();
+                    SqlCommand command = new SqlCommand();
+                    command = new SqlCommand("INSERT INTO [SUBJECT] (Subject_Code, Description, Schedule, Units, SemID, PrelimPercent, MidtermPercent, PrefiPercent) VALUES (@Subject_Code, @Description, @Schedule, @Units, @SemID, @PrelimPercent, @MidtermPercent, @PrefiPercent)", con);
+                    command.Parameters.AddWithValue("@Subject_Code", TbxSubjectCode.Text);
+                    command.Parameters.AddWithValue("@Description", TbxDescription.Text);
+                    command.Parameters.AddWithValue("@Schedule", TbxTimeSchedFromHour.Text + ":" + TbxTimeSchedFromMinute.Text + " - " + TbxTimeSchedToHour.Text + ":" + TbxTimeSchedToMinute.Text + CmbTimeSchedType.SelectedItem.ToString() + " " + TbxDaySched.Text);
+                    command.Parameters.AddWithValue("@Units", Convert.ToInt16(TbxUnits.Text));
+                    command.Parameters.AddWithValue("@SemID", SemesterSelectWindow.selectedSemesterID);
+                    command.Parameters.AddWithValue("@PrelimPercent", 0);
+                    command.Parameters.AddWithValue("@MidtermPercent", 0);
+                    command.Parameters.AddWithValue("@PrefiPercent", 0);
+                    command.ExecuteNonQuery();
+                    con.Close();
+           
                     DialogResult = true;
                 }
             }

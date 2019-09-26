@@ -1,0 +1,113 @@
+﻿<Window x:Class="SAMS.View.Menu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="using:I_Need_That_A"
+        xmlns:t="clr-namespace:I_Need_That_A"
+        Title="MainUserWindow"
+        Width="1366"
+        Height="768"
+        AllowsTransparency="True"
+        WindowState="Maximized"
+        WindowStyle="None">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="#06425C">
+            <Border BorderBrush="White" BorderThickness="0,0,0,2">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="50,20,4,4"
+                               FontSize="50"
+                               FontWeight="ExtraLight"
+                               Foreground="White"
+                               Text="Main Menu">
+                        <TextBlock.Effect>
+                            <DropShadowEffect />
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <Button x:Name="BtnReturn"
+                            Width="120"
+                            Height="50"
+                            Margin="800,4,4,10"
+                            VerticalAlignment="Bottom"
+                            BorderThickness="0"
+                            
+                            Content="Return"
+                            FontSize="23"
+                            FontWeight="Light"
+                            Padding="10" Click="BtnReturn_Click">
+                        <Button.Effect>
+                            <DropShadowEffect />
+                        </Button.Effect>
+                    </Button>
+                    <Button x:Name="BtnExit"
+                            Width="120"
+                            Height="50"
+                            Margin="4,4,4,10"
+                            VerticalAlignment="Bottom"
+                            BorderThickness="0"
+                           
+                            Content="Exit"
+                            FontSize="23"
+                            FontWeight="Light"
+                            Padding="10" Click="BtnExit_Click">
+                        <Button.Effect>
+                            <DropShadowEffect />
+                        </Button.Effect>
+                    </Button>
+                </StackPanel>
+            </Border>
+        </Grid>
+        <Grid Grid.Row="1" Background="#06425C">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Grid.Column="0">
+                <Border BorderBrush="White" BorderThickness="0,0,1,1">
+                    <Button x:Name="BtnClassMenu"
+                            Width="1015"
+                            Height="250"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Background="#51A39D"
+                            
+                            Content="Classes"
+                            FontFamily="Century Gothic"
+                            FontSize="120"
+                            FontWeight="ExtraLight"
+                            Foreground="White"
+                            Padding="50" Click="BtnClassMenu_Click">
+                        <Button.Effect>
+                            <DropShadowEffect />
+                        </Button.Effect>
+                    </Button>
+                </Border>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button x:Name="BtnGradesWindow"
+                        Grid.Column="1"
+                        Width="1015"
+                        Height="250"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Background="#51A39D"
+                       
+                        Content="Grades"
+                        FontFamily="Century Gothic"
+                        FontSize="120"
+                        FontWeight="ExtraLight"
+                        Foreground="White"
+                        Padding="50" Click="BtnGradesWindow_Click">
+                    <Button.Effect>
+                        <DropShadowEffect />
+                    </Button.Effect>
+                </Button>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

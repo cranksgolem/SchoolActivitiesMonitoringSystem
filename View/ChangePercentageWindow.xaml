@@ -1,0 +1,93 @@
+﻿<Window x:Class="SAMS.View.ChangePercentageWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ChangePercentEffectOnTotalGradeWindow"
+        Width="670"
+        Height="430"
+        AllowsTransparency="True"
+        BorderBrush="Black" MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        BorderThickness="2"
+        WindowStyle="None">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0"
+                BorderBrush="White"
+                BorderThickness="0,0,0,2">
+            <StackPanel Background="#06425C" Orientation="Horizontal">
+                <TextBlock Margin="20,20,285,4"
+                           FontSize="35"
+                           FontWeight="ExtraLight"
+                           Foreground="White"
+                           Text="Percentage">
+                    <TextBlock.Effect>
+                        <DropShadowEffect />
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Button x:Name="BtnSave"
+                        Width="80"
+                        Height="40"
+                        Margin="15,4,4,10"
+                        VerticalAlignment="Bottom"
+                        
+                        Click="BtnSave_Click"
+                        Content="Save"
+                        FontSize="23"
+                        Padding="3">
+                    <Button.Effect>
+                        <DropShadowEffect />
+                    </Button.Effect>
+                </Button>
+                <Button x:Name="BtnCancel"
+                        Width="80"
+                        Height="40"
+                        Margin="4,4,4,10"
+                        VerticalAlignment="Bottom"
+                        BorderThickness="0"
+                        Click="BtnCancel_Click"
+                        Content="Cancel"
+                        FontSize="23"
+                        
+                        Padding="3">
+                    <Button.Effect>
+                        <DropShadowEffect />
+                    </Button.Effect>
+                </Button>
+            </StackPanel>
+        </Border>
+        <StackPanel Grid.Row="1"
+                    Background="White"
+                    Orientation="Vertical">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Margin="60,50,0,0"
+                           FontFamily="Century Gothic"
+                           FontSize="30"
+                           FontWeight="ExtraLight"
+                           Foreground="#51A39D"
+                           Text="Old Value" />
+                <TextBlock x:Name="TblOldValue" MinWidth="540"
+                           MinHeight="30"
+                           Margin="60,10,0,0"
+                           HorizontalAlignment="left"
+                           FontSize="20"
+                            />
+            </StackPanel>
+            <StackPanel x:Name="SpNewValue" Orientation="Vertical" >
+                <TextBlock Margin="60,50,0,0"
+                           FontFamily="Century Gothic"
+                           FontSize="30"
+                           FontWeight="ExtraLight"
+                           Foreground="#51A39D"
+                           Text="New Value" />
+                <TextBox x:Name="TbxNewValue" MinWidth="540"
+                         MinHeight="30"
+                         Margin="60,10,0,0"
+                         HorizontalAlignment="left"
+                         FontSize="20"
+                         TextChanged="TbxNewValue_TextChanged" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

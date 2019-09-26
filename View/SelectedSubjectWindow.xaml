@@ -1,0 +1,1140 @@
+﻿<Window x:Class="SAMS.View.SelectedSubjectWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="SelectedClassWindow"
+        Width="1366"
+        Height="768"
+        AllowsTransparency="True"
+        
+        WindowState="Maximized"
+        WindowStyle="None">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Border Background=" #06425C"
+                BorderBrush="White"
+                BorderThickness="0,0,0,3">
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <TextBlock Margin="50,20,4,4"
+                           FontSize="50"
+                           FontWeight="ExtraLight"
+                           Foreground="White"
+                           Text="Class">
+                    <TextBlock.Effect>
+                        <DropShadowEffect />
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Button x:Name="BtnReturn"
+                        Width="120"
+                        Height="50"
+                        Margin="1060,4,4,10"
+                        VerticalAlignment="Bottom"
+                        Click="BtnReturn_Click"
+                        Content="Return"
+                        FontSize="23"
+                        FontWeight="Light"
+                        Padding="10">
+                    <Button.Effect>
+                        <DropShadowEffect />
+                    </Button.Effect>
+                </Button>
+            </StackPanel>
+        </Border>
+        <Grid Grid.Row="1">
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <TextBlock HorizontalAlignment="Center"
+                           FontSize="35"
+                           FontWeight="Bold"
+                           Foreground="#51A39D"
+                           Text="{Binding Path=SubjectName}">
+                    <TextBlock.Effect>
+                        <DropShadowEffect ShadowDepth="3" />
+                    </TextBlock.Effect>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Border BorderBrush="#06425C" BorderThickness="0,0,2,0">
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                            <TextBlock Margin="4"
+                                       HorizontalAlignment="Center"
+                                       FontSize="40"
+                                       FontWeight="Light"
+                                       Foreground="#B7695C"
+                                       Text="Prelim - ">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect ShadowDepth="3" />
+                                </TextBlock.Effect>
+                            </TextBlock>
+                            <TextBlock x:Name="TblPrelimPercent" Margin="4"
+                                       HorizontalAlignment="Center"
+                                       FontSize="40"
+                                       FontWeight="Light"
+                                       Foreground="#B7695C"
+                                       Text="{Binding Path=PrelimPercent}">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect ShadowDepth="3" />
+                                </TextBlock.Effect>
+                            </TextBlock>
+                            <TextBlock Margin="4"
+                                       HorizontalAlignment="Center"
+                                       FontSize="40"
+                                       FontWeight="Light"
+                                       Foreground="#B7695C"
+                                       Text="%">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect ShadowDepth="3" />
+                                </TextBlock.Effect>
+                            </TextBlock>
+                            <Button x:Name="BtnChangePercentEffectPrelim"
+                                    Height="40"
+                                    Margin="4"
+                                    Click="BtnChangePercentEffectPrelim_Click"
+                                    Content="Change"
+                                    FontSize="20"
+                                    Padding="3">
+                                <Button.Effect>
+                                    <DropShadowEffect />
+                                </Button.Effect>
+                            </Button>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="20,0,0,0"
+                                       FontSize="30"
+                                       FontWeight="Light"
+                                       Foreground="#06425C"
+                                       Text="Components">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect ShadowDepth="3" />
+                                </TextBlock.Effect>
+                            </TextBlock>
+                            <Button x:Name="BtnAddComponent"
+                                    Width="63"
+                                    Height="30"
+                                    Margin="45,4,4,4"
+                                    Click="BtnAddComponent_Click"
+                                    Content="Add"
+                                    FontSize="15"
+                                    Padding="3">
+                                <Button.Effect>
+                                    <DropShadowEffect ShadowDepth="3" />
+                                </Button.Effect>
+                            </Button>
+                            <Button x:Name="BtnEdit"
+                                    Width="63"
+                                    Height="30"
+                                    Margin="4"
+                                    Click="BtnEdit_Click"
+                                    Content="Edit"
+                                    FontSize="15"
+                                    Padding="3">
+                                <Button.Effect>
+                                    <DropShadowEffect ShadowDepth="3" />
+                                </Button.Effect>
+                            </Button>
+                            <Button x:Name="BtnRemoveComponent"
+                                    Width="63"
+                                    Height="30"
+                                    Margin="4"
+                                    Click="BtnRemoveComponent_Click"
+                                    Content="Remove"
+                                    FontSize="15"
+                                    Padding="3">
+                                <Button.Effect>
+                                    <DropShadowEffect ShadowDepth="3" />
+                                </Button.Effect>
+                            </Button>
+                        </StackPanel>
+                        <ListView x:Name="LvPrelimComponents"
+                                  MinHeight="240"
+                                  Margin="20,5,20,0"
+                                  Background="#51A39D"
+                                  BorderBrush="#06425C"
+                                  BorderThickness="3"
+                                  ItemsSource="{Binding Path=PrelimListActivity}"
+                                  MouseDoubleClick="LvPrelimComponents_MouseDoubleClick"
+                                  MouseLeftButtonDown="LvPrelimComponents_MouseLeftButtonDown"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="LvPrelimComponents_SelectionChanged"
+                                  >
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.View>
+                                <GridView>
+                                    <GridView.Columns>
+                                        <GridViewColumn Width="139" Header="Lastname">
+                                            <GridViewColumn.HeaderTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock HorizontalAlignment="Center"
+                                                               FontSize="15"
+                                                               FontWeight="Light"
+                                                               Padding="3"
+                                                               Text="Grading Component" />
+                                                </DataTemplate>
+                                            </GridViewColumn.HeaderTemplate>
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock HorizontalAlignment="Center"
+                                                               FontSize="25"
+                                                               FontWeight="Light"
+                                                               Text="{Binding Path=Activity}">
+                                                        <TextBlock.Effect>
+                                                            <DropShadowEffect ShadowDepth="1" />
+                                                        </TextBlock.Effect>
+                                                    </TextBlock>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Width="139" Header="Lastname">
+                                            <GridViewColumn.HeaderTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock HorizontalAlignment="Center"
+                                                               FontSize="20"
+                                                               FontWeight="Light"
+                                                               Text="Percentage" />
+                                                </DataTemplate>
+                                            </GridViewColumn.HeaderTemplate>
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                                        <TextBlock HorizontalAlignment="Center"
+                                                                   FontSize="25"
+                                                                   FontWeight="Light"
+                                                                   Text="{Binding Path=Percentage}">
+                                                            <TextBlock.Effect>
+                                                                <DropShadowEffect ShadowDepth="1" />
+                                                            </TextBlock.Effect>
+                                                        </TextBlock>
+                                                        <TextBlock HorizontalAlignment="Center"
+                                                                   FontSize="25"
+                                                                   FontWeight="Light"
+                                                                   Text="%">
+                                                            <TextBlock.Effect>
+                                                                <DropShadowEffect ShadowDepth="1" />
+                                                            </TextBlock.Effect>
+                                                        </TextBlock>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Width="139" Header="Lastname">
+                                            <GridViewColumn.HeaderTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock HorizontalAlignment="Center"
+                                                               FontSize="20"
+                                                               FontWeight="Light"
+                                                               Text="Grade" />
+                                                </DataTemplate>
+                                            </GridViewColumn.HeaderTemplate>
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                                        <TextBlock HorizontalAlignment="Center"
+                                                                   FontSize="25"
+                                                                   FontWeight="Light"
+                                                                   Text="{Binding Path=Grade,
+                                                                                  StringFormat={}{0:##.##}}">
+                                                            <TextBlock.Effect>
+                                                                <DropShadowEffect ShadowDepth="1" />
+                                                            </TextBlock.Effect>
+                                                        </TextBlock>
+                                                        <TextBlock HorizontalAlignment="Center"
+                                                                   FontSize="25"
+                                                                   FontWeight="Light"
+                                                                   Text="%">
+                                                            <TextBlock.Effect>
+                                                                <DropShadowEffect ShadowDepth="1" />
+                                                            </TextBlock.Effect>
+                                                        </TextBlock>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                    </GridView.Columns>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+
+                        <StackPanel Orientation="Horizontal">
+                            <Grid Margin="20,0,20,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="139" />
+                                    <ColumnDefinition Width="139" />
+                                    <ColumnDefinition Width="139" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0"
+                                           HorizontalAlignment="Right"
+                                           FontSize="27"
+                                           FontWeight="Light"
+                                           Foreground="#B7695C"
+                                           Text="Total:" />
+                                <StackPanel Grid.Column="1" Margin="12,0,0,0"
+                                            HorizontalAlignment="Center"
+                                            Orientation="Horizontal">
+                                    <TextBlock FontSize="27"
+                                               FontWeight="Light"
+                                               Foreground="#B7695C"
+                                               Text="{Binding Path=PrelimComponentsPercentTotal,
+                                                              StringFormat={}{0:##.##}}" />
+                                    <TextBlock FontSize="27"
+                                               FontWeight="Light"
+                                               Foreground="#B7695C"
+                                               Text="%" />
+                                </StackPanel>
+                                <StackPanel Grid.Column="2" Margin="12,0,0,0"
+                                            HorizontalAlignment="Center"
+                                            Orientation="Horizontal">
+                                    <TextBlock x:Name="TblTotalGrade"
+                                               FontSize="27"
+                                               FontWeight="Light"
+                                               Foreground="#B7695C"
+                                               Text="{Binding Path=PrelimGrade,
+                                                              Mode=TwoWay,
+                                                              StringFormat={}{0:##.##}}" />
+                                    <TextBlock FontSize="27"
+                                               FontWeight="Light"
+                                               Foreground="#B7695C"
+                                               Text="%" />
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="11,0,0,0"
+                                       FontSize="27"
+                                       FontWeight="Light"
+                                       Foreground="#B7695C"
+                                       Text="Letter Grade: " />
+                            <TextBlock Margin="43,0,0,0"
+                                       FontSize="30"
+                                       FontWeight="Light"
+                                       Foreground="#B7695C"
+                                       Text="{Binding Path=PrelimLetterGrade}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Grid Margin="20,0,20,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="139" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0"
+                                           HorizontalAlignment="Right"
+                                           FontSize="27"
+                                           FontWeight="Light"
+                                           Foreground="#B7695C"
+                                           Text="Final Grade:" />
+                                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                    <TextBlock Margin="12,0,0,0"
+                                               FontSize="27"
+                                               FontWeight="Light"
+                                               Foreground="#B7695C"
+                                               Text="{Binding Path=PrelimGrade,
+                                                              StringFormat={}{0:##.##}}" />
+                                    <TextBlock FontSize="27"
+                                               FontWeight="Light"
+                                               Foreground="#B7695C"
+                                               Text="%" />
+                                </StackPanel>
+                                <TextBlock Grid.Column="2"
+                                           Margin="15,0,15,0"
+                                           FontSize="27"
+                                           FontWeight="Light"
+                                           Foreground="#B7695C"
+                                           Text="x" />
+                                <TextBlock Grid.Column="3"
+                                           FontSize="24"
+                                           FontWeight="Light"
+                                           Foreground="#B7695C"
+                                           Text="{Binding Path=PrelimPercentToDecimal}" />
+                                <TextBlock Grid.Column="4"
+                                           Margin="15,0,15,0"
+                                           FontSize="27"
+                                           FontWeight="Light"
+                                           Foreground="#B7695C"
+                                           Text="=" />
+                                <StackPanel Grid.Column="5" Orientation="Horizontal">
+                                    <TextBlock FontSize="27"
+                                               FontWeight="Light"
+                                               Foreground="#B7695C"
+                                               Text="{Binding Path=PrelimConvertedGrade,
+                                                              StringFormat={}{0:##.##}}" />
+                                    <TextBlock FontSize="27"
+                                               FontWeight="Light"
+                                               Foreground="#B7695C"
+                                               Text="%" />
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Grid>
+            <Grid Grid.Column="1" >
+                <Border BorderBrush="#06425C" BorderThickness="0,0,2,0">
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                            <TextBlock Margin="4"
+                                       HorizontalAlignment="Center"
+                                       FontSize="40"
+                                       FontWeight="Light"
+                                       Foreground="#B7695C"
+                                       Text="Midterm - ">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect ShadowDepth="3" />
+                                </TextBlock.Effect>
+                            </TextBlock>
+                            <TextBlock x:Name="TblMidtermPercent" Margin="4"
+                                       HorizontalAlignment="Center"
+                                       FontSize="40"
+                                       FontWeight="Light"
+                                       Foreground="#B7695C"
+                                       Text="{Binding Path=MidtermPercent}">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect ShadowDepth="3" />
+                                </TextBlock.Effect>
+                            </TextBlock>
+                            <TextBlock Margin="4"
+                                       HorizontalAlignment="Center"
+                                       FontSize="40"
+                                       FontWeight="Light"
+                                       Foreground="#B7695C"
+                                       Text="%">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect ShadowDepth="3" />
+                                </TextBlock.Effect>
+                            </TextBlock>
+                            <Button x:Name="BtnChangePercentEffectMidterm"
+                                    Height="40"
+                                    Margin="4"
+                                    Click="BtnChangePercentEffectMidterm_Click"
+                                    Content="Change"
+                                    FontSize="20"
+                                    Padding="3">
+                                <Button.Effect>
+                                    <DropShadowEffect />
+                                </Button.Effect>
+                            </Button>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="20,0,0,0"
+                                       FontSize="30"
+                                       FontWeight="Light"
+                                       Foreground="#06425C"
+                                       Text="Components">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect ShadowDepth="3" />
+                                </TextBlock.Effect>
+                            </TextBlock>
+                            <Button x:Name="BtnAddComponentMidterm"
+                                    Width="63"
+                                    Height="30"
+                                    Margin="45,4,4,4"
+                                    Click="BtnAddComponentMidterm_Click"
+                                    Content="Add"
+                                    FontSize="15"
+                                    Padding="3">
+                                <Button.Effect>
+                                    <DropShadowEffect ShadowDepth="3" />
+                                </Button.Effect>
+                            </Button>
+                            <Button x:Name="BtnEditMidterm"
+                                    Width="63"
+                                    Height="30"
+                                    Margin="4"
+                                    Click="BtnEditMidterm_Click"
+                                    Content="Edit"
+                                    FontSize="15"
+                                    Padding="3">
+                                <Button.Effect>
+                                    <DropShadowEffect ShadowDepth="3" />
+                                </Button.Effect>
+                            </Button>
+                            <Button x:Name="BtnRemoveComponentMidterm"
+                                    Width="63"
+                                    Height="30"
+                                    Margin="4"
+                                    Click="BtnRemoveComponentMidterm_Click"
+                                    Content="Remove"
+                                    FontSize="15"
+                                    Padding="3">
+                                <Button.Effect>
+                                    <DropShadowEffect ShadowDepth="3" />
+                                </Button.Effect>
+                            </Button>
+                        </StackPanel>
+                        <ListView x:Name="LvMidtermComponents"
+                                  MinHeight="240"
+                                  Margin="20,5,20,0"
+                                  Background="#51A39D"
+                                  BorderBrush="#06425C"
+                                  BorderThickness="3"
+                                  ItemsSource="{Binding Path=MidtermListActivity}"
+                                  MouseDoubleClick="LvMidtermComponents_MouseDoubleClick"
+                                  MouseLeftButtonDown="LvMidtermComponents_MouseLeftButtonDown"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="LvMidtermComponents_SelectionChanged"
+                                  >
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.View>
+                                <GridView>
+                                    <GridView.Columns>
+                                        <GridViewColumn Width="139" Header="Lastname">
+                                            <GridViewColumn.HeaderTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock HorizontalAlignment="Center"
+                                                               FontSize="15"
+                                                               FontWeight="Light"
+                                                               Padding="3"
+                                                               Text="Grading Component" />
+                                                </DataTemplate>
+                                            </GridViewColumn.HeaderTemplate>
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock HorizontalAlignment="Center"
+                                                               FontSize="25"
+                                                               FontWeight="Light"
+                                                               Text="{Binding Path=Activity}">
+                                                        <TextBlock.Effect>
+                                                            <DropShadowEffect ShadowDepth="1" />
+                                                        </TextBlock.Effect>
+                                                    </TextBlock>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Width="139" Header="Lastname">
+                                            <GridViewColumn.HeaderTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock HorizontalAlignment="Center"
+                                                               FontSize="20"
+                                                               FontWeight="Light"
+                                                               Text="Percentage" />
+                                                </DataTemplate>
+                                            </GridViewColumn.HeaderTemplate>
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                                        <TextBlock HorizontalAlignment="Center"
+                                                                   FontSize="25"
+                                                                   FontWeight="Light"
+                                                                   Text="{Binding Path=Percentage}">
+                                                            <TextBlock.Effect>
+                                                                <DropShadowEffect ShadowDepth="1" />
+                                                            </TextBlock.Effect>
+                                                        </TextBlock>
+                                                        <TextBlock HorizontalAlignment="Center"
+                                                                   FontSize="25"
+                                                                   FontWeight="Light"
+                                                                   Text="%">
+                                                            <TextBlock.Effect>
+                                                                <DropShadowEffect ShadowDepth="1" />
+                                                            </TextBlock.Effect>
+                                                        </TextBlock>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Width="139" Header="Lastname">
+                                            <GridViewColumn.HeaderTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock HorizontalAlignment="Center"
+                                                               FontSize="20"
+                                                               FontWeight="Light"
+                                                               Text="Grade" />
+                                                </DataTemplate>
+                                            </GridViewColumn.HeaderTemplate>
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                                        <TextBlock HorizontalAlignment="Center"
+                                                                   FontSize="25"
+                                                                   FontWeight="Light"
+                                                                   Text="{Binding Path=Grade,
+                                                                                  StringFormat={}{0:##.##}}">
+                                                            <TextBlock.Effect>
+                                                                <DropShadowEffect ShadowDepth="1" />
+                                                            </TextBlock.Effect>
+                                                        </TextBlock>
+                                                        <TextBlock HorizontalAlignment="Center"
+                                                                   FontSize="25"
+                                                                   FontWeight="Light"
+                                                                   Text="%">
+                                                            <TextBlock.Effect>
+                                                                <DropShadowEffect ShadowDepth="1" />
+                                                            </TextBlock.Effect>
+                                                        </TextBlock>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                    </GridView.Columns>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+
+                        <StackPanel Orientation="Horizontal">
+                            <Grid Margin="20,0,20,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="139" />
+                                    <ColumnDefinition Width="139" />
+                                    <ColumnDefinition Width="139" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0"
+                                           HorizontalAlignment="Right"
+                                           FontSize="27"
+                                           FontWeight="Light"
+                                           Foreground="#B7695C"
+                                           Text="Total:" />
+                                <StackPanel Grid.Column="1" Margin="12,0,0,0"
+                                            HorizontalAlignment="Center"
+                                            Orientation="Horizontal">
+                                    <TextBlock FontSize="27"
+                                               FontWeight="Light"
+                                               Foreground="#B7695C"
+                                               Text="{Binding Path=MidtermComponentsPercentTotal,
+                                                              StringFormat={}{0:##.##}}" />
+                                    <TextBlock FontSize="27"
+                                               FontWeight="Light"
+                                               Foreground="#B7695C"
+                                               Text="%" />
+                                </StackPanel>
+                                <StackPanel Grid.Column="2" Margin="12,0,0,0"
+                                            HorizontalAlignment="Center"
+                                            Orientation="Horizontal">
+                                    <TextBlock x:Name="TblTotalGradeMidterm"
+                                               FontSize="30"
+                                               FontWeight="Light"
+                                               Foreground="#B7695C"
+                                               Text="{Binding Path=MidtermGrade,
+                                                              Mode=TwoWay,
+                                                              StringFormat={}{0:##.##}}" />
+                                    <TextBlock FontSize="30"
+                                               FontWeight="Light"
+                                               Foreground="#B7695C"
+                                               Text="%" />
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="11,0,0,0"
+                                       FontSize="27"
+                                       FontWeight="Light"
+                                       Foreground="#B7695C"
+                                       Text="Letter Grade: " />
+                            <TextBlock Margin="43,0,0,0"
+                                       FontSize="30"
+                                       FontWeight="Light"
+                                       Foreground="#B7695C"
+                                       Text="{Binding Path=MidtermLetterGrade}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Grid Margin="20,0,20,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="139" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0"
+                                           HorizontalAlignment="Right"
+                                           FontSize="27"
+                                           FontWeight="Light"
+                                           Foreground="#B7695C"
+                                           Text="Final Grade:" />
+                                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                    <TextBlock Margin="12,0,0,0"
+                                               FontSize="27"
+                                               FontWeight="Light"
+                                               Foreground="#B7695C"
+                                               Text="{Binding Path=MidtermGrade,
+                                                              StringFormat={}{0:##.##}}" />
+                                    <TextBlock FontSize="27"
+                                               FontWeight="Light"
+                                               Foreground="#B7695C"
+                                               Text="%" />
+                                </StackPanel>
+                                <TextBlock Grid.Column="2"
+                                           Margin="15,0,15,0"
+                                           FontSize="27"
+                                           FontWeight="Light"
+                                           Foreground="#B7695C"
+                                           Text="x" />
+                                <TextBlock Grid.Column="3"
+                                           FontSize="24"
+                                           FontWeight="Light"
+                                           Foreground="#B7695C"
+                                           Text="{Binding Path=MidtermPercentToDecimal}" />
+                                <TextBlock Grid.Column="4"
+                                           Margin="15,0,15,0"
+                                           FontSize="27"
+                                           FontWeight="Light"
+                                           Foreground="#B7695C"
+                                           Text="=" />
+                                <StackPanel Grid.Column="5" Orientation="Horizontal">
+                                    <TextBlock FontSize="27"
+                                               FontWeight="Light"
+                                               Foreground="#B7695C"
+                                               Text="{Binding Path=MidtermConvertedGrade,
+                                                              StringFormat={}{0:##.##}}" />
+                                    <TextBlock FontSize="27"
+                                               FontWeight="Light"
+                                               Foreground="#B7695C"
+                                               Text="%" />
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Grid>
+            <Grid Grid.Column="2">
+                <Border BorderBrush="#06425C" BorderThickness="0,0,2,0">
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                            <TextBlock Margin="4"
+                                       HorizontalAlignment="Center"
+                                       FontSize="40"
+                                       FontWeight="Light"
+                                       Foreground="#B7695C"
+                                       Text="Prefinal - ">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect ShadowDepth="3" />
+                                </TextBlock.Effect>
+                            </TextBlock>
+                            <TextBlock x:Name="TblPrefiPercent" Margin="4"
+                                       HorizontalAlignment="Center"
+                                       FontSize="40"
+                                       FontWeight="Light"
+                                       Foreground="#B7695C"
+                                       Text="{Binding Path=PrefiPercent}">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect ShadowDepth="3" />
+                                </TextBlock.Effect>
+                            </TextBlock>
+                            <TextBlock Margin="4"
+                                       HorizontalAlignment="Center"
+                                       FontSize="40"
+                                       FontWeight="Light"
+                                       Foreground="#B7695C"
+                                       Text="%">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect ShadowDepth="3" />
+                                </TextBlock.Effect>
+                            </TextBlock>
+                            <Button x:Name="BtnChangePercentEffectPrefinal"
+                                    Height="40"
+                                    Margin="4"
+                                    Click="BtnChangePercentEffectPrefinal_Click"
+                                    Content="Change"
+                                    FontSize="20"
+                                    Padding="3">
+                                <Button.Effect>
+                                    <DropShadowEffect />
+                                </Button.Effect>
+                            </Button>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="20,0,0,0"
+                                       FontSize="30"
+                                       FontWeight="Light"
+                                       Foreground="#06425C"
+                                       Text="Components">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect ShadowDepth="3" />
+                                </TextBlock.Effect>
+                            </TextBlock>
+                            <Button x:Name="BtnAddComponentPrefinal"
+                                    Width="63"
+                                    Height="30"
+                                    Margin="45,4,4,4"
+                                    Click="BtnAddComponentPrefinal_Click"
+                                    Content="Add"
+                                    FontSize="15"
+                                    Padding="3">
+                                <Button.Effect>
+                                    <DropShadowEffect ShadowDepth="3" />
+                                </Button.Effect>
+                            </Button>
+                            <Button x:Name="BtnEditPrefinal"
+                                    Width="63"
+                                    Height="30"
+                                    Margin="4"
+                                    Click="BtnEditPrefinal_Click"
+                                    Content="Edit"
+                                    FontSize="15"
+                                    Padding="3">
+                                <Button.Effect>
+                                    <DropShadowEffect ShadowDepth="3" />
+                                </Button.Effect>
+                            </Button>
+                            <Button x:Name="BtnRemoveComponentPrefinal"
+                                    Width="63"
+                                    Height="30"
+                                    Margin="4"
+                                    Click="BtnRemoveComponentPrefinal_Click"
+                                    Content="Remove"
+                                    FontSize="15"
+                                    Padding="3">
+                                <Button.Effect>
+                                    <DropShadowEffect ShadowDepth="3" />
+                                </Button.Effect>
+                            </Button>
+                        </StackPanel>
+                        <ListView x:Name="LvPrefinalComponents"
+                                  MinHeight="240"
+                                  Margin="20,5,20,0"
+                                  Background="#51A39D"
+                                  BorderBrush="#06425C"
+                                  BorderThickness="3"
+                                  ItemsSource="{Binding Path=PrefiListActivity}"
+                                  MouseDoubleClick="LvPrefinalComponents_MouseDoubleClick"
+                                  MouseLeftButtonDown="LvPrefinalComponents_MouseLeftButtonDown"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="LvPrefinalComponents_SelectionChanged"
+                                  >
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.View>
+                                <GridView>
+                                    <GridView.Columns>
+                                        <GridViewColumn Width="139" Header="Lastname">
+                                            <GridViewColumn.HeaderTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock HorizontalAlignment="Center"
+                                                               FontSize="15"
+                                                               FontWeight="Light"
+                                                               Padding="3"
+                                                               Text="Grading Component" />
+                                                </DataTemplate>
+                                            </GridViewColumn.HeaderTemplate>
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock HorizontalAlignment="Center"
+                                                               FontSize="25"
+                                                               FontWeight="Light"
+                                                               Text="{Binding Path=Activity}">
+                                                        <TextBlock.Effect>
+                                                            <DropShadowEffect ShadowDepth="1" />
+                                                        </TextBlock.Effect>
+                                                    </TextBlock>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Width="139" Header="Lastname">
+                                            <GridViewColumn.HeaderTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock HorizontalAlignment="Center"
+                                                               FontSize="20"
+                                                               FontWeight="Light"
+                                                               Text="Percentage" />
+                                                </DataTemplate>
+                                            </GridViewColumn.HeaderTemplate>
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                                        <TextBlock HorizontalAlignment="Center"
+                                                                   FontSize="25"
+                                                                   FontWeight="Light"
+                                                                   Text="{Binding Path=Percentage}">
+                                                            <TextBlock.Effect>
+                                                                <DropShadowEffect ShadowDepth="1" />
+                                                            </TextBlock.Effect>
+                                                        </TextBlock>
+                                                        <TextBlock HorizontalAlignment="Center"
+                                                                   FontSize="25"
+                                                                   FontWeight="Light"
+                                                                   Text="%">
+                                                            <TextBlock.Effect>
+                                                                <DropShadowEffect ShadowDepth="1" />
+                                                            </TextBlock.Effect>
+                                                        </TextBlock>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Width="139" Header="Lastname">
+                                            <GridViewColumn.HeaderTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock HorizontalAlignment="Center"
+                                                               FontSize="20"
+                                                               FontWeight="Light"
+                                                               Text="Grade" />
+                                                </DataTemplate>
+                                            </GridViewColumn.HeaderTemplate>
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                                        <TextBlock HorizontalAlignment="Center"
+                                                                   FontSize="25"
+                                                                   FontWeight="Light"
+                                                                   Text="{Binding Path=Grade,
+                                                                                  StringFormat={}{0:##.##}}">
+                                                            <TextBlock.Effect>
+                                                                <DropShadowEffect ShadowDepth="1" />
+                                                            </TextBlock.Effect>
+                                                        </TextBlock>
+                                                        <TextBlock HorizontalAlignment="Center"
+                                                                   FontSize="25"
+                                                                   FontWeight="Light"
+                                                                   Text="%">
+                                                            <TextBlock.Effect>
+                                                                <DropShadowEffect ShadowDepth="1" />
+                                                            </TextBlock.Effect>
+                                                        </TextBlock>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                    </GridView.Columns>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+
+                        <StackPanel Orientation="Horizontal">
+                            <Grid Margin="20,0,20,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="139" />
+                                    <ColumnDefinition Width="139" />
+                                    <ColumnDefinition Width="139" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0"
+                                           HorizontalAlignment="Right"
+                                           FontSize="27"
+                                           FontWeight="Light"
+                                           Foreground="#B7695C"
+                                           Text="Total:" />
+                                <StackPanel Grid.Column="1" Margin="12,0,0,0"
+                                            HorizontalAlignment="Center"
+                                            Orientation="Horizontal">
+                                    <TextBlock FontSize="27"
+                                               FontWeight="Light"
+                                               Foreground="#B7695C"
+                                               Text="{Binding Path=PrefiComponentsPercentTotal,
+                                                              StringFormat={}{0:##.##}}" />
+                                    <TextBlock FontSize="27"
+                                               FontWeight="Light"
+                                               Foreground="#B7695C"
+                                               Text="%" />
+                                </StackPanel>
+                                <StackPanel Grid.Column="2" Margin="12,0,0,0"
+                                            HorizontalAlignment="Center"
+                                            Orientation="Horizontal">
+                                    <TextBlock x:Name="TblTotalGradePrefinal"
+                                               FontSize="27"
+                                               FontWeight="Light"
+                                               Foreground="#B7695C"
+                                               Text="{Binding Path=PrefiGrade,
+                                                              Mode=TwoWay,
+                                                              StringFormat={}{0:##.##}}" />
+                                    <TextBlock FontSize="27"
+                                               FontWeight="Light"
+                                               Foreground="#B7695C"
+                                               Text="%" />
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="11,0,0,0"
+                                       FontSize="27"
+                                       FontWeight="Light"
+                                       Foreground="#B7695C"
+                                       Text="Letter Grade: " />
+                            <TextBlock Margin="43,0,0,0"
+                                       FontSize="30"
+                                       FontWeight="Light"
+                                       Foreground="#B7695C"
+                                       Text="{Binding Path=PrefiLetterGrade}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Grid Margin="20,0,20,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="139" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0"
+                                           HorizontalAlignment="Right"
+                                           FontSize="27"
+                                           FontWeight="Light"
+                                           Foreground="#B7695C"
+                                           Text="Final Grade:" />
+                                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                    <TextBlock Margin="12,0,0,0"
+                                               FontSize="27"
+                                               FontWeight="Light"
+                                               Foreground="#B7695C"
+                                               Text="{Binding Path=PrefiGrade,
+                                                              StringFormat={}{0:##.##}}" />
+                                    <TextBlock FontSize="27"
+                                               FontWeight="Light"
+                                               Foreground="#B7695C"
+                                               Text="%" />
+                                </StackPanel>
+                                <TextBlock Grid.Column="2"
+                                           Margin="15,0,15,0"
+                                           FontSize="27"
+                                           FontWeight="Light"
+                                           Foreground="#B7695C"
+                                           Text="x" />
+                                <TextBlock Grid.Column="3"
+                                           FontSize="24"
+                                           FontWeight="Light"
+                                           Foreground="#B7695C"
+                                           Text="{Binding Path=PrefiPercentToDecimal}" />
+                                <TextBlock Grid.Column="4"
+                                           Margin="15,0,15,0"
+                                           FontSize="27"
+                                           FontWeight="Light"
+                                           Foreground="#B7695C"
+                                           Text="=" />
+                                <StackPanel Grid.Column="5" Orientation="Horizontal">
+                                    <TextBlock FontSize="27"
+                                               FontWeight="Light"
+                                               Foreground="#B7695C"
+                                               Text="{Binding Path=PrefiConvertedGrade,
+                                                              StringFormat={}{0:##.##}}" />
+                                    <TextBlock FontSize="27"
+                                               FontWeight="Light"
+                                               Foreground="#B7695C"
+                                               Text="%" />
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Grid>
+        <!--<Grid Grid.Row="3" Margin="10,10,4,0" HorizontalAlignment="Left">
+            <Border Background="#06425C"  BorderBrush="Black" BorderThickness="2" CornerRadius="4">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Copy " Margin="4,7,0,0" Foreground="White">
+                    <TextBlock.Effect>
+                        <DropShadowEffect ShadowDepth="1" />
+                    </TextBlock.Effect>
+                </TextBlock>
+                <ComboBox x:Name="CmbGradingPeriodFrom" Width="75" Height="20" Margin="2,0,4,10" SelectionChanged="CmbGradingPeriodFrom_SelectionChanged">
+                    <ComboBox.Effect>
+                        <DropShadowEffect ShadowDepth="1" />
+                    </ComboBox.Effect>
+                </ComboBox>
+                    <TextBlock Text="  components  " Margin="0,7,0,0" Foreground="White">
+                    <TextBlock.Effect>
+                        <DropShadowEffect ShadowDepth="1" />
+                    </TextBlock.Effect>
+                </TextBlock>
+                <StackPanel Orientation="Vertical">
+                        <RadioButton x:Name="RbEveryOther" Foreground="White" Margin="0,7,0,0"  GroupName="CopyStyle" Content="to every other grading period">
+                        <RadioButton.Effect>
+                            <DropShadowEffect ShadowDepth="1"></DropShadowEffect>
+                        </RadioButton.Effect>
+                    </RadioButton>
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton x:Name="RbTo" Foreground="White" GroupName="CopyStyle" Content="to " >
+                                <RadioButton.Effect>
+                                    <DropShadowEffect ShadowDepth="1"></DropShadowEffect>
+                                </RadioButton.Effect>
+                            </RadioButton>
+                            <ComboBox x:Name="CmbGradingPeriodTo" Width="75" Height="20" Margin="0,0,0,4">
+                                <ComboBox.Effect>
+                                    <DropShadowEffect ShadowDepth="1" />
+                                </ComboBox.Effect>
+                            </ComboBox>
+                        </StackPanel>
+                    </StackPanel>
+                <Button x:Name="BtnGo"
+                                    Width="40"
+                                    Margin="4,0,4,0"
+                                    Height="20"
+                                    
+                                    Content="Go"
+                                    FontSize="10"
+                                    Padding="3" Click="BtnGo_Click">
+                    <Button.Effect>
+                        <DropShadowEffect ShadowDepth="1" />
+                    </Button.Effect>
+                </Button>
+            </StackPanel>
+            </Border>
+        </Grid>-->
+        <Grid Grid.Row="4">
+            <StackPanel Orientation="Vertical">
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,30,0,0">
+                    <TextBlock Margin="10,0,10,0"
+                               HorizontalAlignment="Center"
+                               FontSize="40"
+                               FontWeight="Light"
+                               Foreground="#51A39D"
+                               Text="Total Final Grade: ">
+                        <TextBlock.Effect>
+                            <DropShadowEffect ShadowDepth="3" />
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <TextBlock HorizontalAlignment="Center"
+                               FontSize="40"
+                               FontWeight="Light"
+                               Foreground="#51A39D"
+                               Text="{Binding Path=FinalGrade,
+                                              StringFormat={}{0:##.##}}">
+                        <TextBlock.Effect>
+                            <DropShadowEffect ShadowDepth="3" />
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <TextBlock HorizontalAlignment="Center"
+                               FontSize="40"
+                               FontWeight="Light"
+                               Foreground="#51A39D"
+                               Text="%">
+                        <TextBlock.Effect>
+                            <DropShadowEffect ShadowDepth="3" />
+                        </TextBlock.Effect>
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                    <TextBlock Margin="0,0,10,0"
+                               HorizontalAlignment="Center"
+                               FontSize="40"
+                               FontWeight="Light"
+                               Foreground="#51A39D"
+                               Text="Letter Grade: ">
+                        <TextBlock.Effect>
+                            <DropShadowEffect ShadowDepth="3" />
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <TextBlock HorizontalAlignment="Center"
+                               FontSize="40"
+                               FontWeight="Light"
+                               Foreground="#51A39D"
+                               Text="{Binding Path=FinalLetterGrade}">
+                        <TextBlock.Effect>
+                            <DropShadowEffect ShadowDepth="3" />
+                        </TextBlock.Effect>
+                    </TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
